@@ -13,6 +13,10 @@ const project = new AwsCdkConstructLibrary({
   eslint: true,
   releaseToNpm: true,
   releaseWorkflow: true,
+  publishToPypi: {
+    distName: 'flywaymigrationconstruct',
+    module: 'construct',
+  },
   releaseEveryCommit: true,
   // cdkDependencies: undefined,        /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
   // cdkTestDependencies: undefined,    /* AWS CDK modules required for testing. */
