@@ -1,6 +1,8 @@
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as awsLambda from '@aws-cdk/aws-lambda';
+import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
+
 
 export class FlywayConstruct extends cdk.Construct {
   flywayLambdaMigration: awsLambda.Function;
@@ -30,7 +32,7 @@ export class FlywayConstruct extends cdk.Construct {
         user: user,
         password: password,
       },
-      code: awsLambda.Code.fromAsset('flywayjar.zip'),
+      code: awsLambda.S3Code.fromBucket(s3.Bucket.fromBucketArn(this, 'test', 'arn:aws:s3:::flywaymigrationconstruct'), 'flywayjar.zip'),
     });
   }
 }
