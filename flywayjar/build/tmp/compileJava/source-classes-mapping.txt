@@ -1,3 +1,0 @@
-flywayjar/Main.java
- flywayjar.Main
- flywayjar.s3client
