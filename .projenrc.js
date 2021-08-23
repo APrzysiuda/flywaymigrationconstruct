@@ -33,7 +33,7 @@ const project = new AwsCdkConstructLibrary({
 
 //project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
 //'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct');
-/*const task1= new GithubWorkflow(project.github, 'gitWorkFlow');
+const task1= new GithubWorkflow(project.github, 'gitWorkFlow');
 task1.addJobs([
   {
     runsOn: 'ubuntu-latest',
@@ -49,7 +49,7 @@ task1.addJobs([
       name: 'checkout',
     },
     {
-      run: './gradlew build',
+      run: './gradlew build && ./gradlew buildZip',
     },
     {
       name: 'run upload !',
@@ -60,9 +60,9 @@ task1.addJobs([
 ]);
 task1.on({
   push: {
-    branches: -m,
+    branches: '-m',
   },
-});*/
+});
 project.gitignore.include('flywayjar/');
 project.addPackageIgnore('flywayjar/');
 project.synth();
