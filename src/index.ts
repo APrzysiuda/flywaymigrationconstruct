@@ -1,7 +1,6 @@
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as awsLambda from '@aws-cdk/aws-lambda';
 import * as cdk from '@aws-cdk/core';
-import * as s3 from '@aws-cdk/aws-s3';
 
 export class FlywayConstruct extends cdk.Construct {
   flywayLambdaMigration: awsLambda.Function;
