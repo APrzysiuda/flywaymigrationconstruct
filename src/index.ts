@@ -5,7 +5,6 @@ import * as s3 from '@aws-cdk/aws-s3';
 
 export class FlywayConstruct extends cdk.Construct {
   flywayLambdaMigration: lambda.Function;
-
   constructor(scope: cdk.Construct,
     id: string,
     VPC: ec2.Vpc,
@@ -16,7 +15,6 @@ export class FlywayConstruct extends cdk.Construct {
     user: string,
     password: string) {
     super(scope, id);
-
     this.flywayLambdaMigration = new lambda.Function(this, 'flywayLambdaMigration', {
       vpc: VPC,
       vpcSubnets: subnet,
@@ -36,6 +34,5 @@ export class FlywayConstruct extends cdk.Construct {
         s3.Bucket.fromBucketArn(this, 'zipBucket', 'arn:aws:s3:::flywaymigrationconstruct'),
         'flywayjar.zip'),
     });
-
   }
 }
