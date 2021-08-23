@@ -100,6 +100,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-s3",
+      "version": "^1.95.2",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/core",
       "version": "^1.95.2",
       "type": "peer"
@@ -116,6 +121,11 @@
     },
     {
       "name": "@aws-cdk/aws-lambda",
+      "version": "^1.95.2",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-s3",
       "version": "^1.95.2",
       "type": "runtime"
     },

@@ -10,7 +10,7 @@ const project = new AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/180517/flywaymigrationconstruct.git',
   projectType: ProjectType.LIB,
   cdkAssert: true,
-  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2'],
+  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3'],
   docgen: true,
   eslint: true,
   releaseToNpm: true,
@@ -30,6 +30,6 @@ const project = new AwsCdkConstructLibrary({
   // release: undefined,                /* Add release management to this project. */
 });
 project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
-    'cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip flywayjar.zip');
+    'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://bucket-name');
 
 project.synth();
