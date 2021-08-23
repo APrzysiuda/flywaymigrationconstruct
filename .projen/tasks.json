@@ -272,14 +272,6 @@
         }
       ]
     },
-    "test1": {
-      "name": "test1",
-      "steps": [
-        {
-          "exec": "cd flywayjar && gradle build && gradle buildZip && cd .. && aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct"
-        }
-      ]
-    },
     "release": {
       "name": "release",
       "description": "Prepare a release from \"main\" branch",
