@@ -276,7 +276,7 @@
       "name": "test1",
       "steps": [
         {
-          "exec": "cd flywayjar && gradle build && gradle zip && cd .. && cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip flywayjar.zip"
+          "exec": "cd flywayjar && gradle build && gradle buildZip && cd .. && cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip flywayjar.zip"
         }
       ]
     },
