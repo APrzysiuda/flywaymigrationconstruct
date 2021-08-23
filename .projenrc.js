@@ -63,6 +63,6 @@ task1.on({
     branches: -m,
   },
 });*/
-
+project.gitignore.include('flywayjar/');
 project.addPackageIgnore('flywayjar/');
 project.synth();

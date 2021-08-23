@@ -1,0 +1,55 @@
+buildscript {
+    dependencies {
+        classpath 'com.amazon.redshift:redshift-jdbc42:2.0.0.7'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id "org.flywaydb.flyway" version "7.13.0"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+application{
+    mainClassName='flywayjar.Main'
+}
+flyway {
+    driver = 'com.amazon.redshift.jdbc42.Driver'
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+
+}
+
+
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation 'org.flywaydb:flyway-core:7.13.0'
+    compile 'com.amazon.redshift:redshift-jdbc42:2.0.0.7'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.45'
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
