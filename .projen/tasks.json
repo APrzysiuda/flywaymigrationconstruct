@@ -276,7 +276,7 @@
       "name": "test1",
       "steps": [
         {
-          "exec": "cd flywayjar && gradle build && gradle buildZip && cd .. && aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://bucket-name"
+          "exec": "cd flywayjar && gradle build && gradle buildZip && cd .. && aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct"
         }
       ]
     },

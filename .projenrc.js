@@ -30,6 +30,6 @@ const project = new AwsCdkConstructLibrary({
   // release: undefined,                /* Add release management to this project. */
 });
 project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
-    'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://bucket-name');
+    'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct');
 
 project.synth();
