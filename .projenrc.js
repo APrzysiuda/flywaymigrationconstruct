@@ -1,4 +1,6 @@
-const { AwsCdkConstructLibrary, ProjectType } = require('projen');
+const { AwsCdkConstructLibrary, ProjectType, github, git } = require('projen');
+const { TaskWorkflow, GitHub } = require('projen/lib/github');
+const { Task } = require('projen/lib/tasks');
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
@@ -27,4 +29,7 @@ const project = new AwsCdkConstructLibrary({
   // projectType: ProjectType.UNKNOWN,  /* Which type of project this is (library/app). */
   // release: undefined,                /* Add release management to this project. */
 });
+project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
+    'cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip flywayjar.zip');
+
 project.synth();
