@@ -19,7 +19,6 @@
 /test-reports/
 build/Release
 coverage
-flywayjar/*
 jspm_packages/
 junit.xml
 lerna-debug.log*

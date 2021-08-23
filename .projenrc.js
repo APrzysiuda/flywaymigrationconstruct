@@ -64,5 +64,5 @@ task1.on({
   },
 });*/
 
-project.gitignore.exclude('flywayjar/*');
+project.addPackageIgnore('flywayjar/');
 project.synth();

@@ -16,6 +16,7 @@
 /tsconfig.jest.json
 /tsconfig.json
 dist
+flywayjar/
 junit.xml
 tsconfig.tsbuildinfo
 !.jsii
