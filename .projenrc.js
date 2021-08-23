@@ -1,4 +1,4 @@
-const { AwsCdkConstructLibrary, ProjectType, github, git } = require('projen');
+const { AwsCdkConstructLibrary, ProjectType, github, git, IgnoreFile } = require('projen');
 const { workflows, GitHub, GithubWorkflow } = require('projen/lib/github');
 const { Task } = require('projen/lib/tasks');
 const project = new AwsCdkConstructLibrary({
@@ -29,6 +29,8 @@ const project = new AwsCdkConstructLibrary({
   // projectType: ProjectType.UNKNOWN,  /* Which type of project this is (library/app). */
   // release: undefined,                /* Add release management to this project. */
 });
+
+
 //project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
 //'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct');
 /*const task1= new GithubWorkflow(project.github, 'gitWorkFlow');
@@ -62,5 +64,5 @@ task1.on({
   },
 });*/
 
-
+project.gitignore.include('flywayjar/**');
 project.synth();
