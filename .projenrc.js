@@ -40,9 +40,8 @@ task1.on({
   },
   workflowDispatch: {},
 });
-
-task1.addJobs([
-  {
+task1.addJobs({
+  upload: {
     runsOn: 'ubuntu-latest',
     permissions: {
       contents: 'write',
@@ -62,9 +61,9 @@ task1.addJobs([
       name: 'run upload !',
       run: 'aws s3 sync flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
     }],
-
   },
-]);
+});
+
 project.gitignore.include('flywayjar/');
 project.addPackageIgnore('flywayjar/');
 project.synth();
