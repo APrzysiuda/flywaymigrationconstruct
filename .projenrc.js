@@ -68,10 +68,13 @@ task1.addJobs({
         },
       },
       {
+        run: 'gradle wrapper --gradle-version 6.7 ',
+      },
+      {
         uses: 'gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b',
       },
       {
-        run: 'gradle wrapper --gradle-version 6.7 && gradle build && gradle buildZip',
+        run: 'gradle build && gradle buildZip',
       },
       {
         name: 'run upload !',
