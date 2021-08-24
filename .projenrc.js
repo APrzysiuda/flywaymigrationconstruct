@@ -70,6 +70,10 @@ task1.addJobs({
       {
         name: 'run upload !',
         run: 'aws s3 sync ./flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
+        env: {
+          AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
+          AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',
+        },
       },
     ],
   },
