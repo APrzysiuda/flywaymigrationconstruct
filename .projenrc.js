@@ -63,7 +63,9 @@ task1.addJobs({
       {
         uses: 'actions/setup-java@v2',
         with: {
-          java: '11',
+          java:{
+            version: '11',
+          },
           distribution: 'adopt',
         },
       },
