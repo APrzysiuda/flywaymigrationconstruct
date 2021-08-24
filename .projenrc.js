@@ -50,7 +50,7 @@ task1.addJobs({
     },
     steps: [
       {
-        uses: 'actions/checkout@v2',
+        uses: 'actions/checkout',
         name: 'checkout',
       },
       {
