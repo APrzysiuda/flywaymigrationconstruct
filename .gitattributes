@@ -8,6 +8,7 @@
 /.github/workflows/gitworkflow.yml	linguist-generated
 /.github/workflows/release.yml    	linguist-generated
 /.github/workflows/stale.yml      	linguist-generated
+/.github/workflows/task1.yml      	linguist-generated
 /.github/workflows/upgrade.yml    	linguist-generated
 /.gitignore                       	linguist-generated
 /.mergify.yml                     	linguist-generated

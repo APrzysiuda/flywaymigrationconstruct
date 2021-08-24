@@ -38,6 +38,7 @@ yarn-error.log*
 !/.github/workflows/gitworkflow.yml
 !/.github/workflows/release.yml
 !/.github/workflows/stale.yml
+!/.github/workflows/task1.yml
 !/.github/workflows/upgrade.yml
 !/.mergify.yml
 !/.npmignore
