@@ -36,8 +36,9 @@ const project = new AwsCdkConstructLibrary({
 const task1= project.github.addWorkflow('taskUpload');
 task1.on({
   push: {
-    branches: '-m',
+    branches: '-main',
   },
+  workflowDispatch: {},
 });
 
 task1.addJobs([

@@ -3,7 +3,8 @@
 name: taskUpload
 on:
   push:
-    branches: -m
+    branches: -main
+  workflow_dispatch: {}
 jobs:
   "0":
     runs-on: ubuntu-latest
