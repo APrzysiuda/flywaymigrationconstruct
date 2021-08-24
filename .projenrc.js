@@ -61,7 +61,17 @@ task1.addJobs({
         name: 'checkout2',
       },
       {
-        run: './gradle build && ./gradle buildZip',
+        uses: 'actions/setup-java@v2',
+        with: {
+          java: '11',
+          distribution: 'adopt',
+        },
+      },
+      {
+        uses: 'gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b',
+      },
+      {
+        run: './gradlew build && ./gradlew buildZip',
       },
       {
         name: 'run upload !',
