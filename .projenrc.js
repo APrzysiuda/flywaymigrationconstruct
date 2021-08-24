@@ -61,7 +61,8 @@ task1.addJobs({
         name: 'checkout2',
       },
       {
-        run: 'gradle build && gradle buildZip',
+        'run': 'gradle build && gradle buildZip',
+        'working-directory': './flywayjar',
       },
       {
         name: 'run upload !',
