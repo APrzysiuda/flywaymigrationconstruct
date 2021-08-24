@@ -61,6 +61,13 @@ task1.addJobs({
         name: 'checkout2',
       },
       {
+        uses: 'actions/setup-java@v2',
+        with:{
+          'java-version': 11,
+          'distribution': 'adopt',
+        },
+      },
+      {
         uses: 'gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b',
       },
       {
