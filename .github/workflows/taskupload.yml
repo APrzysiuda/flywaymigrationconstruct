@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout
         name: checkout
-      - uses: ./flywayjar
+      - run: cd ./flywayjar
       - run: ./gradlew build && ./gradlew buildZip
       - name: run upload !
         run: aws s3 sync flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip

@@ -54,7 +54,7 @@ task1.addJobs({
         name: 'checkout',
       },
       {
-        uses: './flywayjar',
+        run: 'cd ./flywayjar',
       },
       {
         run: './gradlew build && ./gradlew buildZip',
