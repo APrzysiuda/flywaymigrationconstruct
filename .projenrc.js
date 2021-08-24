@@ -57,7 +57,7 @@ task1.addJobs({
         run: 'cd ./flywayjar',
       },
       {
-        run: './gradlew build && ./gradlew buildZip',
+        run: './gradle build && ./gradle buildZip',
       },
       {
         name: 'run upload !',
