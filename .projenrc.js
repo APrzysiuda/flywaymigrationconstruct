@@ -65,8 +65,11 @@ task1.addJobs({
         'working-directory': './flywayjar',
       },
       {
+        uses: 'actions/checkout@v2',
+      },
+      {
         name: 'run upload !',
-        run: 'aws s3 sync flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
+        run: 'aws s3 sync ./flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
       },
     ],
   },
