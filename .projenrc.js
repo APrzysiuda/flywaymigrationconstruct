@@ -46,21 +46,24 @@ task1.addJobs({
     permissions: {
       contents: 'write',
       packages: 'write',
+      actions: 'write',
     },
-    steps: [{
-      run: 'cd flywayjar',
-    },
-    {
-      uses: 'actions/checkout@v2',
-      name: 'checkout',
-    },
-    {
-      run: './gradlew build && ./gradlew buildZip',
-    },
-    {
-      name: 'run upload !',
-      run: 'aws s3 sync flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
-    }],
+    steps: [
+      {
+        uses: 'actions/checkout@v2',
+        name: 'checkout',
+      },
+      {
+        uses: './flywayjar',
+      },
+      {
+        run: './gradlew build && ./gradlew buildZip',
+      },
+      {
+        name: 'run upload !',
+        run: 'aws s3 sync flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct',
+      },
+    ],
   },
 });
 
