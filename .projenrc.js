@@ -57,6 +57,10 @@ task1.addJobs({
         run: 'cd ./flywayjar',
       },
       {
+        uses: 'actions/checkout@v2',
+        name: 'checkout2',
+      },
+      {
         run: './gradle build && ./gradle buildZip',
       },
       {
