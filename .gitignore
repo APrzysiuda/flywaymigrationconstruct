@@ -35,10 +35,9 @@ yarn-error.log*
 !/.gitattributes
 !/.github/pull_request_template.md
 !/.github/workflows/build.yml
-!/.github/workflows/gitworkflow.yml
 !/.github/workflows/release.yml
 !/.github/workflows/stale.yml
-!/.github/workflows/task1.yml
+!/.github/workflows/taskupload.yml
 !/.github/workflows/upgrade.yml
 !/.mergify.yml
 !/.npmignore
