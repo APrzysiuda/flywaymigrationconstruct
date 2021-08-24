@@ -48,7 +48,7 @@ task1.addJobs({
       packages: 'write',
     },
     steps: [{
-      run: 'cd /flywayjar',
+      run: 'cd flywayjar',
     },
     {
       uses: 'actions/checkout@v2',
