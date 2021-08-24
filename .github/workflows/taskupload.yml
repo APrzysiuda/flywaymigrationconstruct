@@ -13,7 +13,7 @@ jobs:
       packages: write
       actions: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout
         name: checkout
       - uses: ./flywayjar
       - run: ./gradlew build && ./gradlew buildZip
