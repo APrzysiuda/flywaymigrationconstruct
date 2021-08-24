@@ -26,6 +26,7 @@ class s3client extends AmazonS3Client{
 
     //listing object in bucket
     public List<S3ObjectSummary> getBucketObjectSummaries(String bucketName){
+        System.out.println("in listing");
         List<S3ObjectSummary> s3ObjectSummaries=new ArrayList<S3ObjectSummary>();
         try {
             ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucketName);
@@ -64,6 +65,7 @@ class s3client extends AmazonS3Client{
 
     public List<String> getBucketObjectNames(String bucketName){
         List<String> s3ObjectNames = new ArrayList<String>();
+        System.out.println("in bucket");
         List<S3ObjectSummary> s3ObjectSummaries = getBucketObjectSummaries(bucketName);
 
         for(S3ObjectSummary s3ObjectSummary : s3ObjectSummaries){
