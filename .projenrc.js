@@ -39,6 +39,7 @@ task1.on({
     branches: '-m',
   },
 });
+
 task1.addJobs([
   {
     runsOn: 'ubuntu-latest',
