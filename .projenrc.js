@@ -68,6 +68,7 @@ task1.addJobs({
         uses: 'actions/upload-artifact@v1',
         with: {
           name: 'upload change',
+          path: './flywayjar',
         },
       },
       {
