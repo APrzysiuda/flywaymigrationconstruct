@@ -22,7 +22,7 @@ jobs:
         working-directory: ./flywayjar
       - name: run upload !
         run: mkdir ./temp && cp
-          usr/git/bin/flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip
+          usr/bin/flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip
           ./temp/flywayjar.zip && aws s3 sync ./temp/
           s3://flywaymigrationconstruct
         env:
