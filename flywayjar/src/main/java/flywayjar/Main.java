@@ -9,6 +9,8 @@ import org.flywaydb.core.Flyway;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.secretsmanager.SecretsManagerClient;
+import com.amazonaws.services.secretsmanager.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,8 +80,7 @@ class s3client extends AmazonS3Client{
 public class Main {
     public String handleRequest (Map<String, Object> input, Context context) throws IOException {
         //parameter
-        String region= System.getenv("region");
-        String bucketName= System.getenv("bucketName");
+        String bucketName= System.getenv("BUCKETNAME");
 
         //login ID (name, password and url) (depend of the db and the type of db)
         /*String secret=System.getenv("secret");
@@ -92,10 +93,19 @@ public class Main {
         String port=jsonsecret.get("port").toString().replace('"',' ').strip();
         String dbname=jsonsecret.get("dbname").toString().replace('"',' ').strip();
         String url="jdbc:redshift://"+host+":"+port+"/"+dbname;*/
-        String username=System.getenv("user");
-        String url=System.getenv("url");
-        String password=System.getenv("password");
+        //String username=System.getenv("user");
+        String arn=System.getenv("ARN");
+        //String password=System.getenv("password");
+        SecretsManagerClient secretsManager= new SecretsManagerClient.fromSecretCompleteArn(this, 'secretsManager', arn)
+        String engine= secretsManager.secretValueFromJson('engine').toString();
+        String password= secretsManager.secretValueFromJson('password').toString();
+        String user= secretsManager.secretValueFromJson('username').toString();
+        String host= secretsManager.secretValueFromJson('host').toString();
+        String port= secretsManager.secretValueFromJson('port').toString();
+        String dbname= secretsManager.secretValueFromJson('dbname').toString();
+        String url= "jdbc:"+engine+"://"+host+":"+port+"/"+dbname;
 
+        System.out.println(url)
         //path for files (always tmp for flyway)
         Path outputPath= Paths.get("/tmp");
         System.out.println("initialisation du client s3");

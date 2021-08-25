@@ -10,7 +10,7 @@ const project = new AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/180517/flywaymigrationconstruct.git',
   projectType: ProjectType.LIB,
   cdkAssert: true,
-  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3'],
+  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
   eslint: true,
   releaseToNpm: true,
@@ -20,19 +20,7 @@ const project = new AwsCdkConstructLibrary({
     module: 'construct',
   },
   releaseEveryCommit: true,
-  // cdkDependencies: undefined,        /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
-  // cdkTestDependencies: undefined,    /* AWS CDK modules required for testing. */
-  // deps: [],                          /* Runtime dependencies of this module. */
-  // description: undefined,            /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],                       /* Build dependencies for this module. */
-  // packageName: undefined,            /* The "name" in package.json. */
-  // projectType: ProjectType.UNKNOWN,  /* Which type of project this is (library/app). */
-  // release: undefined,                /* Add release management to this project. */
 });
-
-
-//project.addTask('test1').exec('cd flywayjar && gradle build && gradle buildZip && cd .. && ' +
-//'aws s3 cp flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip s3://flywaymigrationconstruct');
 const task1= project.github.addWorkflow('taskUpload');
 task1.on({
   push: {
