@@ -30,7 +30,7 @@ task1.on({
 });
 task1.addJobs({
   upload: {
-    runsOn: 'ubuntu-18.04',
+    runsOn: 'ubuntu-lastest',
     permissions: {
       contents: 'write',
       packages: 'write',
