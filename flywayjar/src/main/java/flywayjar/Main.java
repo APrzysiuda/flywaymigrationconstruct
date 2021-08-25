@@ -97,12 +97,12 @@ public class Main {
         String arn=System.getenv("ARN");
         //String password=System.getenv("password");
         SecretsManagerClient secretsManager= new SecretsManagerClient.fromSecretCompleteArn(this, 'secretsManager', arn)
-        String engine= secretsManager.secretValueFromJson('engine').toString();
-        String password= secretsManager.secretValueFromJson('password').toString();
-        String user= secretsManager.secretValueFromJson('username').toString();
-        String host= secretsManager.secretValueFromJson('host').toString();
-        String port= secretsManager.secretValueFromJson('port').toString();
-        String dbname= secretsManager.secretValueFromJson('dbname').toString();
+        String engine= secretsManager.secretValueFromJson("engine").toString();
+        String password= secretsManager.secretValueFromJson("password").toString();
+        String user= secretsManager.secretValueFromJson("username").toString();
+        String host= secretsManager.secretValueFromJson("host").toString();
+        String port= secretsManager.secretValueFromJson("port").toString();
+        String dbname= secretsManager.secretValueFromJson("dbname").toString();
         String url= "jdbc:"+engine+"://"+host+":"+port+"/"+dbname;
 
         System.out.println(url);
