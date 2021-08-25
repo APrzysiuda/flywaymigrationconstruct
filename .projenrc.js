@@ -63,6 +63,9 @@ task1.addJobs({
       {
         'run': 'gradle build && gradle buildZip',
         'working-directory': './flywayjar',
+        'outputs': {
+          outputName: 'testoutput',
+        },
       },
       {
         uses: 'actions/checkout@v2',

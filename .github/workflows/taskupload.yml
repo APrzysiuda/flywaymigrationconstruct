@@ -20,6 +20,8 @@ jobs:
         name: checkout2
       - run: gradle build && gradle buildZip
         working-directory: ./flywayjar
+        outputs:
+          outputName: testoutput
       - uses: actions/checkout@v2
       - name: run upload !
         run: mkdir ./temp && cp $env:GITHUB_PATH ./temp/flywayjar.zip && aws s3 sync
