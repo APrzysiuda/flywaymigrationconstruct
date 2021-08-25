@@ -9,7 +9,8 @@ import org.flywaydb.core.Flyway;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.secretsmanager.SecretsManagerClient;
+import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
+import com.amazonaws.services.secretsmanager.*;
 import com.amazonaws.services.secretsmanager.model.*;
 
 import java.io.File;
@@ -83,27 +84,44 @@ public class Main {
         String bucketName= System.getenv("BUCKETNAME");
 
         //login ID (name, password and url) (depend of the db and the type of db)
-        /*String secret=System.getenv("secret");
+
+        //String username=System.getenv("user");
+        String arn=System.getenv("ARN");
+        //String password=System.getenv("password");
+        AWSSecretsManagerClientBuilder secretsManager= AWSSecretsManagerClientBuilder.standard();
+        AWSSecretsManager clientManager = secretsManager.build();
+        GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(arn);
+        GetSecretValueResult getSecretValueResult=null;
+        try{
+            getSecretValueResult = clientManager.getSecretValue(getSecretValueRequest);
+        }catch(ResourceNotFoundException e) {
+            System.out.println("The requested secret " + arn + " was not found");
+        } catch (InvalidRequestException e) {
+            System.out.println("The request was invalid due to: " + e.getMessage());
+        } catch (InvalidParameterException e) {
+            System.out.println("The request had invalid params: " + e.getMessage());
+        }
+
+        String username=getSecretValueResult.getName();
+        String secret= getSecretValueResult.getSecretString();
 
         JsonObject jsonsecret = new Gson().fromJson(secret,JsonObject.class);
-        String username= jsonsecret.get("username").toString().replace('"',' ').strip();
+
         String password=jsonsecret.get("password").toString().replace('"',' ').strip();
 
         String host=jsonsecret.get("host").toString().replace('"',' ').strip();
         String port=jsonsecret.get("port").toString().replace('"',' ').strip();
         String dbname=jsonsecret.get("dbname").toString().replace('"',' ').strip();
-        String url="jdbc:redshift://"+host+":"+port+"/"+dbname;*/
-        //String username=System.getenv("user");
-        String arn=System.getenv("ARN");
-        //String password=System.getenv("password");
-        SecretsManagerClient secretsManager= new SecretsManagerClient.fromSecretCompleteArn(this, "secretsManager", arn);
-        String engine= secretsManager.secretValueFromJson("engine").toString();
+        String engine=jsonsecret.get("engine").toString().replace('"',' ').strip();
+        String url="jdbc:"+engine+"://"+host+":"+port+"/"+dbname;
+
+        /*String engine= secretsManager.secretValueFromJson("engine").toString();
         String password= secretsManager.secretValueFromJson("password").toString();
         String user= secretsManager.secretValueFromJson("username").toString();
         String host= secretsManager.secretValueFromJson("host").toString();
         String port= secretsManager.secretValueFromJson("port").toString();
         String dbname= secretsManager.secretValueFromJson("dbname").toString();
-        String url= "jdbc:"+engine+"://"+host+":"+port+"/"+dbname;
+        String url= "jdbc:"+engine+"://"+host+":"+port+"/"+dbname;*/
 
         System.out.println(url);
         //path for files (always tmp for flyway)
