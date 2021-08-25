@@ -96,7 +96,7 @@ public class Main {
         //String username=System.getenv("user");
         String arn=System.getenv("ARN");
         //String password=System.getenv("password");
-        SecretsManagerClient secretsManager= new SecretsManagerClient.fromSecretCompleteArn(this, 'secretsManager', arn)
+        SecretsManagerClient secretsManager= new SecretsManagerClient.fromSecretCompleteArn(this, "secretsManager", arn)
         String engine= secretsManager.secretValueFromJson("engine").toString();
         String password= secretsManager.secretValueFromJson("password").toString();
         String user= secretsManager.secretValueFromJson("username").toString();
