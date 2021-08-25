@@ -105,7 +105,7 @@ public class Main {
         String dbname= secretsManager.secretValueFromJson('dbname').toString();
         String url= "jdbc:"+engine+"://"+host+":"+port+"/"+dbname;
 
-        System.out.println(url)
+        System.out.println(url);
         //path for files (always tmp for flyway)
         Path outputPath= Paths.get("/tmp");
         System.out.println("initialisation du client s3");
