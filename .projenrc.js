@@ -63,16 +63,10 @@ task1.addJobs({
       {
         'run': 'gradle build && gradle buildZip',
         'working-directory': './flywayjar',
-        'outputs': {
-          outputName: 'testoutput',
-        },
-      },
-      {
-        uses: 'actions/checkout@v2',
       },
       {
         name: 'run upload !',
-        run: 'mkdir ./temp && cp $env:GITHUB_PATH ./temp/flywayjar.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
+        run: 'mkdir ./temp && cp usr/git/bin/flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip ./temp/flywayjar.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
         env: {
           AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
           AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',
