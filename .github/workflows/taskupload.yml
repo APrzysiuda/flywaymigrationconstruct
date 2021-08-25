@@ -25,7 +25,7 @@ jobs:
           name: upload change
           path: ./flywayjar
       - name: run upload !
-        run: mkdir ./temp && cp
+        run: export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp
           ./flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip
           ./temp/flywayjar.zip && aws s3 sync ./temp/
           s3://flywaymigrationconstruct
