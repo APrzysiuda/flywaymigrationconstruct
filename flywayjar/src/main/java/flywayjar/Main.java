@@ -108,7 +108,7 @@ public class Main {
         JsonObject jsonsecret = new Gson().fromJson(secret,JsonObject.class);
 
         String password=jsonsecret.get("password").toString().replace('"',' ').strip();
-        String username=jsonsecret.get('username').toString().replace('"',' ').strip();
+        String username=jsonsecret.get("username").toString().replace('"',' ').strip();
         String host=jsonsecret.get("host").toString().replace('"',' ').strip();
         String port=jsonsecret.get("port").toString().replace('"',' ').strip();
         String dbname=jsonsecret.get("dbname").toString().replace('"',' ').strip();
