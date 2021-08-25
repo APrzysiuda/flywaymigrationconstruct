@@ -98,7 +98,7 @@ public class Main {
 
         //path for files (always tmp for flyway)
         Path outputPath= Paths.get("/tmp");
-        System.out.println("initialisation du client");
+        System.out.println("initialisation du client s3");
         //s3client
         s3client client =new s3client();
         System.out.println("Client créer");
