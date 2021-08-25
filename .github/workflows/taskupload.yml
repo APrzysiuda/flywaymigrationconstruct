@@ -21,6 +21,8 @@ jobs:
       - run: gradle build && gradle buildZip
         working-directory: ./flywayjar
       - uses: actions/upload-artifact@v1
+        with:
+          name: upload change
       - name: run upload !
         run: mkdir ./temp && cp
           ./flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip
