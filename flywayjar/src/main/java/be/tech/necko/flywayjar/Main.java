@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import be.necko.tech.flywayjar.S3Client;
+import be.tech.necko.flywayjar.S3Client;
 
 public class Main {
     private static final Logger LOGGERr = LoggerFactory.getLogger(Main.class);
