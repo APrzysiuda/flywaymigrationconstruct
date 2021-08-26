@@ -33,7 +33,7 @@ export class FlywayConstruct extends cdk.Construct {
       vpc: param.vpc,
       vpcSubnets: param.subnet,
       securityGroups: param.securityGroups,
-      memorySize: memorySize || this.defaultMemorySize,
+      memorySize: this.defaultMemorySize || memorySize,
       timeout: this.defaultTimeout || cdk.Duration.seconds(timeout),
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
