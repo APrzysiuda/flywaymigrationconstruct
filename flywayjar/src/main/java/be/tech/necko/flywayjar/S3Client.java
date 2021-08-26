@@ -1,4 +1,4 @@
-package be.necko.tech.flywayjar;
+package be.tech.necko.flywayjar;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
@@ -12,46 +12,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class S3Client extends AmazonS3Client {
+class S3Client{
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
     //S3client
-    public S3Client() {
-        AmazonS3ClientBuilder.standard().build();
-    }
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    public AmazonS3 s3Client=AmazonS3ClientBuilder.standard().build();
+
     //listing object in bucket
     public List<S3ObjectSummary> getBucketObjectSummaries(String bucketName) {
-        logger.info("in getBucketObjectSummaries");
+        LOGGER.info("in getBucketObjectSummaries");
         List<S3ObjectSummary> s3ObjectSummaries = new ArrayList<S3ObjectSummary>();
         try {
-            ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucketName);
-            ObjectListing objectListing;
+            ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request().withBucketName(bucketName);
+            ListObjectsV2Result objectListing;
 
             do {
-                objectListing = this.listObjects(listObjectsRequest);
+                objectListing = s3Client.listObjectsV2(listObjectsRequest);
                 for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
                     s3ObjectSummaries.add(objectSummary);
                 }
-                listObjectsRequest.setMarker(objectListing.getNextMarker());
+                listObjectsRequest.setContinuationToken(objectListing.getNextContinuationToken());
             } while (objectListing.isTruncated());
 
         } catch (AmazonServiceException ase) {
-            logger.error("Caught an AmazonServiceException, " +
+            LOGGER.error("Caught an AmazonServiceException, " +
                     "which means your request made it " +
                     "to Amazon BdS3Client, but was rejected with an error response " +
                     "for some reason.");
-            logger.error("Error Message:    " + ase.getMessage());
-            logger.error("HTTP Status Code: " + ase.getStatusCode());
-            logger.error("AWS Error Code:   " + ase.getErrorCode());
-            logger.error("Error Type:       " + ase.getErrorType());
-            logger.error("Request ID:       " + ase.getRequestId());
+            LOGGER.error("Error Message:    " + ase.getMessage());
+            LOGGER.error("HTTP Status Code: " + ase.getStatusCode());
+            LOGGER.error("AWS Error Code:   " + ase.getErrorCode());
+            LOGGER.error("Error Type:       " + ase.getErrorType());
+            LOGGER.error("Request ID:       " + ase.getRequestId());
 
         } catch (AmazonClientException ace) {
-            logger.error("Caught an AmazonClientException, " +
+            LOGGER.error("Caught an AmazonClientException, " +
                     "which means the client encountered " +
                     "an internal error while trying to communicate" +
                     " with BdS3Client, " +
                     "such as not being able to access the network.");
-            logger.error("Error Message: " + ace.getMessage());
+            LOGGER.error("Error Message: " + ace.getMessage());
         }
         return s3ObjectSummaries;
     }
@@ -59,7 +60,7 @@ class S3Client extends AmazonS3Client {
 
     public List<String> getBucketObjectNames(String bucketName) {
         List<String> s3ObjectNames = new ArrayList<String>();
-        logger.info("in getBucketObjectNames");
+        LOGGER.info("in getBucketObjectNames");
         List<S3ObjectSummary> s3ObjectSummaries = getBucketObjectSummaries(bucketName);
 
         for (S3ObjectSummary s3ObjectSummary : s3ObjectSummaries) {

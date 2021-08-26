@@ -73,7 +73,7 @@ task1.addJobs({
   },
 });
 
-
+project.gitignore.exclude('.idea/');
 project.gitignore.exclude('flywayjar/build/');
 project.addPackageIgnore('flywayjar/');
 project.synth();

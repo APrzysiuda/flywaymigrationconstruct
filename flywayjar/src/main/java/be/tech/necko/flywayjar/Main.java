@@ -1,4 +1,4 @@
-package be.necko.tech.flywayjar;
+package be.tech.necko.flywayjar;
 
 import com.amazonaws.services.s3.model.*;
 import com.google.gson.Gson;
@@ -21,7 +21,7 @@ import java.util.Map;
 import be.necko.tech.flywayjar.S3Client;
 
 public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGERr = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws IOException {
         //parameter
         String bucketName = System.getenv("BUCKETNAME");
@@ -35,11 +35,11 @@ public class Main {
         try {
             getSecretValueResult = clientManager.getSecretValue(getSecretValueRequest);
         } catch (ResourceNotFoundException e) {
-            logger.error("The requested secret " + arn + " was not found");
+            LOGGER.error("The requested secret " + arn + " was not found");
         } catch (InvalidRequestException e) {
-            logger.error("The request was invalid due to: " + e.getMessage());
+            LOGGER.error("The request was invalid due to: " + e.getMessage());
         } catch (InvalidParameterException e) {
-            logger.error("The request had invalid params: " + e.getMessage());
+            LOGGER.error("The request had invalid params: " + e.getMessage());
         }
 
 
@@ -55,22 +55,22 @@ public class Main {
         String url = "jdbc:" + engine + "://" + host + ":" + port + "/" + dbname;
 
 
-        logger.debug(url);
+        LOGGER.debug(url);
         //path for files (always tmp for flyway)
         Path outputPath = Paths.get("/tmp");
-        logger.info("initialisation du client s3");
+        LOGGER.info("initialisation du client s3");
         //S3Client
         S3Client client = new S3Client();
-        logger.info("Client creer");
+        LOGGER.info("Client creer");
         List<String> objectList = client.getBucketObjectNames(bucketName);
-        logger.info("entrer dans la boucle");
+        LOGGER.info("entrer dans la boucle");
         //save object in tmp
         for (String objectName : objectList) {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);
-            String paths = "/tmp/" + objectName;
-            client.getObject(getObjectRequest, new File(paths));
+            String path = "/tmp/" + objectName;
+            client.s3Client.getObject(getObjectRequest, new File(path));
         }
-        logger.info("initialisation de la migration");
+        LOGGER.info("initialisation de la migration");
         //configure flyway with
         Flyway flyway = Flyway.configure().dataSource(url, username, password).locations("filesystem:/tmp/").load();
         // Start the migration
