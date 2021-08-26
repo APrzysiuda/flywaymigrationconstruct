@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.45'
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.amazonaws:aws-java-sdk-secretsmanager:1.12.53'
-    // compile 'com.amazon.redshift.jdbc42.Driver'
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha4'
 
 }
 
