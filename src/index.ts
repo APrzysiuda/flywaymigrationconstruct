@@ -23,9 +23,9 @@ export class FlywayConstruct extends cdk.Construct {
       securityGroups: [ec2.SecurityGroup];
       bucket: s3.IBucket;
       migrationBucketSecretArn: string;
-      timeout?: undefined;
-      memorySize?: undefined;
     },
+    timeout?: number,
+    memorySize?: number,
   ) {
     super(scope, id);
     const secretManager= awssecret.Secret.fromSecretCompleteArn(this, 'managerDB', param.migrationBucketSecretArn);
@@ -33,8 +33,8 @@ export class FlywayConstruct extends cdk.Construct {
       vpc: param.vpc,
       vpcSubnets: param.subnet,
       securityGroups: param.securityGroups,
-      memorySize: param.memorySize || this.defaultMemorySize,
-      timeout: cdk.Duration.seconds(param.timeout) || this.defaultTimeout,
+      memorySize: memorySize || this.defaultMemorySize,
+      timeout: cdk.Duration.seconds(timeout) || this.defaultTimeout,
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
