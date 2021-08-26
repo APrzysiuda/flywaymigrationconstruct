@@ -58,7 +58,7 @@ public class S3Client{
     }
 
 
-    public List<String> getBucketObjectNames(String bucketName) {
+    public List<String> getBucketObjectNames(String bucketName) throws ClientException {
         List<String> s3ObjectNames = new ArrayList<String>();
         LOGGER.info("in getBucketObjectNames");
         List<S3ObjectSummary> s3ObjectSummaries = getBucketObjectSummaries(bucketName);
