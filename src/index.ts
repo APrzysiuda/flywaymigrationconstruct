@@ -13,7 +13,7 @@ export class FlywayConstruct extends cdk.Construct {
   bucketCodeArn = 'arn:aws:s3:::flywaymigrationconstruct';
   objectCodeKey = 'flywayjar.0.1.0.zip';
   defaultMemorySize = 512;
-  defaultTimeout = 30;
+  defaultTimeout = cdk.Duration.seconds(30);
 
   constructor(scope: cdk.Construct,
     id: string,
@@ -34,7 +34,7 @@ export class FlywayConstruct extends cdk.Construct {
       vpcSubnets: param.subnet,
       securityGroups: param.securityGroups,
       memorySize: param.memorySize || this.defaultMemorySize,
-      timeout: cdk.Duration.seconds(param.timeout) || cdk.Duration.seconds(this.defaultTimeout),
+      timeout: cdk.Duration.seconds(param.timeout) || this.defaultTimeout,
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
