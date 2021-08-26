@@ -23,8 +23,8 @@ export class FlywayConstruct extends cdk.Construct {
       securityGroups: [ec2.SecurityGroup];
       bucket: s3.IBucket;
       migrationBucketSecretArn: string;
-      timeout?: number;
-      memorySize?: number;
+      timeout?: undefined;
+      memorySize?: undefined;
     },
   ) {
     super(scope, id);
