@@ -12,8 +12,6 @@ export class FlywayConstruct extends cdk.Construct {
   idLambdaCode = 'bucketMigration';
   bucketCodeArn = 'arn:aws:s3:::flywaymigrationconstruct';
   objectCodeKey = 'flywayjar.0.1.0.zip';
-  defaultMemorySize = 512;
-  defaultTimeout = cdk.Duration.seconds(30);
 
   constructor(scope: cdk.Construct,
     id: string,
@@ -24,8 +22,6 @@ export class FlywayConstruct extends cdk.Construct {
       bucket: s3.IBucket;
       migrationBucketSecretArn: string;
     },
-    timeout?: number,
-    memorySize?: number,
   ) {
     super(scope, id);
     const secretManager= awssecret.Secret.fromSecretCompleteArn(this, 'managerDB', param.migrationBucketSecretArn);
@@ -33,8 +29,8 @@ export class FlywayConstruct extends cdk.Construct {
       vpc: param.vpc,
       vpcSubnets: param.subnet,
       securityGroups: param.securityGroups,
-      memorySize: this.defaultMemorySize || memorySize,
-      timeout: this.defaultTimeout || cdk.Duration.seconds(timeout),
+      memorySize: 512,
+      timeout: cdk.Duration.seconds(30),
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
