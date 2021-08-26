@@ -84,8 +84,8 @@ public class Main {
         String bucketName= System.getenv("BUCKETNAME");
 
         //login ID (name, password and url) (depend of the db and the type of db)
-
-        //String username=System.getenv("user");
+/String username=System.getenv("user");
+        /
         String arn=System.getenv("ARN");
         //String password=System.getenv("password");
         AWSSecretsManagerClientBuilder secretsManager= AWSSecretsManagerClientBuilder.standard();
