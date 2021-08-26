@@ -4,10 +4,10 @@ const { Task } = require('projen/lib/tasks');
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
-  cdkVersion: '1.95.2',
+  cdkVersion: '1.119.0',
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
-  repositoryUrl: 'https://github.com/180517/flywaymigrationconstruct.git',
+  repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
   projectType: ProjectType.LIB,
   cdkAssert: true,
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
@@ -63,7 +63,7 @@ task1.addJobs({
       },
       {
         name: 'run upload !',
-        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0-SNAPSHOT.zip ./temp/flywayjar.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
+        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.0.1.0.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
         env: {
           AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
           AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',

@@ -11,8 +11,9 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.tech.necko.flywayjar.ClientException;
 
-class S3Client{
+public class S3Client{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
@@ -20,7 +21,7 @@ class S3Client{
     public AmazonS3 s3Client=AmazonS3ClientBuilder.standard().build();
 
     //listing object in bucket
-    public List<S3ObjectSummary> getBucketObjectSummaries(String bucketName) {
+    public List<S3ObjectSummary> getBucketObjectSummaries(String bucketName) throws ClientException {
         LOGGER.info("in getBucketObjectSummaries");
         List<S3ObjectSummary> s3ObjectSummaries = new ArrayList<S3ObjectSummary>();
         try {
@@ -36,23 +37,22 @@ class S3Client{
             } while (objectListing.isTruncated());
 
         } catch (AmazonServiceException ase) {
-            LOGGER.error("Caught an AmazonServiceException, " +
+            throw new ClientException("Caught an AmazonServiceException, " +
                     "which means your request made it " +
                     "to Amazon BdS3Client, but was rejected with an error response " +
-                    "for some reason.");
-            LOGGER.error("Error Message:    " + ase.getMessage());
-            LOGGER.error("HTTP Status Code: " + ase.getStatusCode());
-            LOGGER.error("AWS Error Code:   " + ase.getErrorCode());
-            LOGGER.error("Error Type:       " + ase.getErrorType());
-            LOGGER.error("Request ID:       " + ase.getRequestId());
+                    "for some reason." +
+                    " Error Message:    " + ase.getMessage() +
+                    "HTTP Status Code: " + ase.getStatusCode() +
+                    "Error Type:       " + ase.getErrorType() +
+                    "Request ID:       " + ase.getRequestId());
 
         } catch (AmazonClientException ace) {
-            LOGGER.error("Caught an AmazonClientException, " +
+            throw new ClientException("Caught an AmazonClientException, " +
                     "which means the client encountered " +
                     "an internal error while trying to communicate" +
                     " with BdS3Client, " +
-                    "such as not being able to access the network.");
-            LOGGER.error("Error Message: " + ace.getMessage());
+                    "such as not being able to access the network." +
+                    "Error Message: " + ace.getMessage());
         }
         return s3ObjectSummaries;
     }
