@@ -21,6 +21,8 @@ const project = new AwsCdkConstructLibrary({
   },
   releaseEveryCommit: true,
 });
+
+
 const task1= project.github.addWorkflow('taskUpload');
 task1.on({
   push: {
@@ -71,7 +73,7 @@ task1.addJobs({
   },
 });
 
-project.gitignore.include('flywayjar/');
+
 project.gitignore.exclude('flywayjar/build/');
 project.addPackageIgnore('flywayjar/');
 project.synth();

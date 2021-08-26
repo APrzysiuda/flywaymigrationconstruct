@@ -24,7 +24,7 @@ export class FlywayConstruct extends cdk.Construct {
       allowPublicSubnet: true,
       memorySize: 512,
       timeout: cdk.Duration.seconds(30),
-      handler: 'flywayjar.Main::handleRequest',
+      handler: 'be.necko.tech.flywayjar.Main::handleRequest',
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
         ARN: arn,
