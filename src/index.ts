@@ -8,10 +8,10 @@ import * as cdk from '@aws-cdk/core';
 export class FlywayConstruct extends cdk.Construct {
 
   flywayLambdaMigration: awsLambda.Function;
-  handler: 'be.tech.necko.flywayjar.Main::handleRequest';
-  idLambdaCode: 'bucketMigration';
-  bucketCodeArn: 'arn:aws:s3:::flywaymigrationconstruct';
-  objectCodeKey: 'flywayjar.0.1.0.zip';
+  handler = 'be.tech.necko.flywayjar.Main::handleRequest';
+  idLambdaCode = 'bucketMigration';
+  bucketCodeArn = 'arn:aws:s3:::flywaymigrationconstruct';
+  objectCodeKey = 'flywayjar.0.1.0.zip';
 
   constructor(scope: cdk.Construct,
     id: string,
