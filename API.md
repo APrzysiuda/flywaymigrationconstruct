@@ -34,36 +34,37 @@ new FlywayConstruct(scope: Construct, id: string, params: FlywayConstructParams)
 
 #### Properties <a name="Properties"></a>
 
-##### `bucketCodeArn`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.bucketCodeArn"></a>
-
-- *Type:* `string`
-
----
-
 ##### `flywayLambdaMigration`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.flywayLambdaMigration"></a>
 
 - *Type:* [`@aws-cdk/aws-lambda.Function`](#@aws-cdk/aws-lambda.Function)
 
 ---
 
-##### `handler`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.handler"></a>
+#### Constants <a name="Constants"></a>
+
+##### `BUCKET_CODE_ARN` <a name="flywaymigrationconstruct.FlywayConstruct.property.BUCKET_CODE_ARN"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `idLambdaCode`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.idLambdaCode"></a>
+##### `HANDLER` <a name="flywaymigrationconstruct.FlywayConstruct.property.HANDLER"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `objectCodeKey`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.objectCodeKey"></a>
+##### `ID_LAMBDA_CODE` <a name="flywaymigrationconstruct.FlywayConstruct.property.ID_LAMBDA_CODE"></a>
 
 - *Type:* `string`
 
 ---
 
+##### `OBJECT_CODE_KEY` <a name="flywaymigrationconstruct.FlywayConstruct.property.OBJECT_CODE_KEY"></a>
+
+- *Type:* `string`
+
+---
 
 ## Structs <a name="Structs"></a>
 
@@ -83,9 +84,9 @@ const flywayConstructParams: FlywayConstructParams = { ... }
 
 ---
 
-##### `migrationBucketSecretArn`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.migrationBucketSecretArn"></a>
+##### `migrationBucketSecretManager`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.migrationBucketSecretManager"></a>
 
-- *Type:* `string`
+- *Type:* [`@aws-cdk/aws-secretsmanager.ISecret`](#@aws-cdk/aws-secretsmanager.ISecret)
 
 ---
 

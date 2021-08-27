@@ -17,11 +17,14 @@ export interface FlywayConstructParams {
   readonly timeout?: cdk.Duration;
 }
 export class FlywayConstruct extends cdk.Construct {
+
   static readonly HANDLER = 'be.tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
   static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
   static readonly OBJECT_CODE_KEY = 'flywayjar.0.1.0.zip';
+
   flywayLambdaMigration: awsLambda.Function;
+
   constructor(scope: cdk.Construct,
     id: string,
     params: FlywayConstructParams,
