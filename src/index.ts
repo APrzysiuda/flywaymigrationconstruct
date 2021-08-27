@@ -6,14 +6,14 @@ import * as cdk from '@aws-cdk/core';
 
 //version : 0.1.0
 
-export interface FlywayConstructParams{
-  bucket: s3.IBucket;
-  vpc: ec2.IVpc;
-  subnet: ec2.SubnetSelection;
-  securityGroups: [ec2.SecurityGroup];
-  migrationBucketSecretArn: string;
-  timeout?: cdk.Duration;
-  memorySize?: number;
+export interface FlywayConstructParams {
+  readonly bucket: s3.IBucket;
+  readonly vpc: ec2.IVpc;
+  readonly subnet: ec2.SubnetSelection;
+  readonly securityGroups: [ec2.SecurityGroup];
+  readonly migrationBucketSecretArn: string;
+  readonly timeout?: cdk.Duration;
+  readonly memorySize?: number;
 }
 export class FlywayConstruct extends cdk.Construct {
 
