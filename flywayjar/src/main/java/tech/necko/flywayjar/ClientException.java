@@ -1,4 +1,4 @@
-package be.tech.necko.flywayjar;
+package tech.necko.flywayjar;
 
 public class ClientException extends Exception{
     public ClientException(String message){

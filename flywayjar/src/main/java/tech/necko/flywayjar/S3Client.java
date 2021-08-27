@@ -1,4 +1,4 @@
-package be.tech.necko.flywayjar;
+package tech.necko.flywayjar;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.tech.necko.flywayjar.ClientException;
+import tech.necko.flywayjar.ClientException;
 
 public class S3Client{
 

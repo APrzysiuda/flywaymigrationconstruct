@@ -1,4 +1,4 @@
-package be.tech.necko.flywayjar;
+package tech.necko.flywayjar;
 
 import com.amazonaws.services.s3.model.*;
 import com.google.gson.Gson;
@@ -18,8 +18,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import be.tech.necko.flywayjar.S3Client;
-import be.tech.necko.flywayjar.ClientException;
+import tech.necko.flywayjar.S3Client;
+import tech.necko.flywayjar.ClientException;
 
 public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
