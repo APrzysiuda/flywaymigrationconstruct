@@ -17,7 +17,7 @@ const project = new AwsCdkConstructLibrary({
   releaseWorkflow: true,
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
-    module: 'flywayconstruct',
+    module: 'flywaymigrationconstruct',
   },
   releaseEveryCommit: true,
 });
