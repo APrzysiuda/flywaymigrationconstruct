@@ -15,6 +15,9 @@ export class FlywayConstruct extends cdk.Construct {
 
   constructor(scope: cdk.Construct,
     id: string,
+    params: {
+      test?: string;
+    },
     vpc: ec2.IVpc,
     subnet: ec2.SubnetSelection,
     securityGroups: [ec2.SecurityGroup],
