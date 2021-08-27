@@ -124,7 +124,7 @@
     "targets": {
       "python": {
         "distName": "flywaymigrationconstruct",
-        "module": "construct"
+        "module": "flywayconstruct"
       }
     },
     "tsc": {
