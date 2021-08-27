@@ -5,6 +5,16 @@ import * as awssecret from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
 
 //version : 0.1.0
+
+export interface FlywayConstructParams{
+  bucket: s3.IBucket;
+  vpc: ec2.IVpc;
+  subnet: ec2.SubnetSelection;
+  securityGroups: [ec2.SecurityGroup];
+  migrationBucketSecretArn: string;
+  timeout?: number;
+  memorySize?: number;
+}
 export class FlywayConstruct extends cdk.Construct {
 
   flywayLambdaMigration: awsLambda.Function;
@@ -15,27 +25,20 @@ export class FlywayConstruct extends cdk.Construct {
 
   constructor(scope: cdk.Construct,
     id: string,
-    params: {
-      bucket: s3.IBucket,
-    },
-    vpc: ec2.IVpc,
-    subnet: ec2.SubnetSelection,
-    securityGroups: [ec2.SecurityGroup],
-    migrationBucketSecretArn: string,
-
+    params: FlywayConstructParams,
   ) {
     super(scope, id);
-    const secretManager= awssecret.Secret.fromSecretCompleteArn(this, 'managerDB', migrationBucketSecretArn);
+    const secretManager= awssecret.Secret.fromSecretCompleteArn(this, 'managerDB', params.migrationBucketSecretArn);
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
-      vpc: vpc,
-      vpcSubnets: subnet,
-      securityGroups: securityGroups,
-      memorySize: 512,
-      timeout: cdk.Duration.seconds(30),
+      vpc: params.vpc,
+      vpcSubnets: params.subnet,
+      securityGroups: params.securityGroups,
+      memorySize: params.memorySize || 512,
+      timeout: cdk.Duration.seconds(params.timeout) || cdk.Duration.seconds(30),
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
-        ARN: migrationBucketSecretArn,
+        ARN: params.migrationBucketSecretArn,
         BUCKETNAME: params.bucket.bucketName,
       },
       code: awsLambda.S3Code.fromBucket(
