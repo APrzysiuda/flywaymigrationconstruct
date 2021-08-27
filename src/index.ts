@@ -16,12 +16,11 @@ export class FlywayConstruct extends cdk.Construct {
   constructor(scope: cdk.Construct,
     id: string,
     params: {
-      test?: string;
+      bucket: s3.IBucket,
     },
     vpc: ec2.IVpc,
     subnet: ec2.SubnetSelection,
     securityGroups: [ec2.SecurityGroup],
-    bucket: s3.IBucket,
     migrationBucketSecretArn: string,
 
   ) {
@@ -37,7 +36,7 @@ export class FlywayConstruct extends cdk.Construct {
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
         ARN: migrationBucketSecretArn,
-        BUCKETNAME: bucket.bucketName,
+        BUCKETNAME: params.bucket.bucketName,
       },
       code: awsLambda.S3Code.fromBucket(
         s3.Bucket.fromBucketArn(this, this.idLambdaCode, this.bucketCodeArn),
