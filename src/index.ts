@@ -12,7 +12,7 @@ export interface FlywayConstructParams{
   subnet: ec2.SubnetSelection;
   securityGroups: [ec2.SecurityGroup];
   migrationBucketSecretArn: string;
-  timeout?: number;
+  timeout?: cdk.Duration;
   memorySize?: number;
 }
 export class FlywayConstruct extends cdk.Construct {
@@ -34,7 +34,7 @@ export class FlywayConstruct extends cdk.Construct {
       vpcSubnets: params.subnet,
       securityGroups: params.securityGroups,
       memorySize: params.memorySize || 512,
-      timeout: cdk.Duration.seconds(params.timeout) || cdk.Duration.seconds(30),
+      timeout: params.timeout || cdk.Duration.seconds(30),
       handler: this.handler,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
