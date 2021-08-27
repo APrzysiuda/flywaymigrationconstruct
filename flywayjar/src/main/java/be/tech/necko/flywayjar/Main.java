@@ -25,7 +25,7 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
-        String bucketName = System.getenv("BUCKETNAME");
+        String bucketName = System.getenv("BUCKET_NAME");
         String arn = System.getenv("ARN");
 
         //SecretsManager

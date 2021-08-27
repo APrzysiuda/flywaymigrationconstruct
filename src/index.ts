@@ -10,41 +10,40 @@ export interface FlywayConstructParams {
   readonly bucket: s3.IBucket;
   readonly vpc: ec2.IVpc;
   readonly subnet: ec2.SubnetSelection;
-  readonly securityGroups: [ec2.SecurityGroup];
-  readonly migrationBucketSecretArn: string;
+  readonly securityGroups: [ec2.ISecurityGroup];
+  readonly migrationBucketSecretManager: awssecret.ISecret;
   readonly timeout?: cdk.Duration;
   readonly memorySize?: number;
 }
 export class FlywayConstruct extends cdk.Construct {
 
   flywayLambdaMigration: awsLambda.Function;
-  handler = 'be.tech.necko.flywayjar.Main::handleRequest';
-  idLambdaCode = 'bucketMigration';
-  bucketCodeArn = 'arn:aws:s3:::flywaymigrationconstruct';
-  objectCodeKey = 'flywayjar.0.1.0.zip';
+  HANDLER = 'be.tech.necko.flywayjar.Main::handleRequest';
+  ID_LAMBDA_CODE = 'bucketMigration';
+  BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
+  OBJECT_CODE_KEY = 'flywayjar.0.1.0.zip';
 
   constructor(scope: cdk.Construct,
     id: string,
     params: FlywayConstructParams,
   ) {
     super(scope, id);
-    const secretManager= awssecret.Secret.fromSecretCompleteArn(this, 'managerDB', params.migrationBucketSecretArn);
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
       vpc: params.vpc,
       vpcSubnets: params.subnet,
       securityGroups: params.securityGroups,
       memorySize: params.memorySize || 512,
       timeout: params.timeout || cdk.Duration.seconds(30),
-      handler: this.handler,
+      handler: this.HANDLER,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
-        ARN: params.migrationBucketSecretArn,
-        BUCKETNAME: params.bucket.bucketName,
+        ARN: params.migrationBucketSecretManager.secretArn,
+        BUCKET_NAME: params.bucket.bucketName,
       },
       code: awsLambda.S3Code.fromBucket(
-        s3.Bucket.fromBucketArn(this, this.idLambdaCode, this.bucketCodeArn),
-        this.objectCodeKey),
+        s3.Bucket.fromBucketArn(this, this.ID_LAMBDA_CODE, this.BUCKET_CODE_ARN),
+        this.OBJECT_CODE_KEY),
     });
-    secretManager.grantRead(this.flywayLambdaMigration);
+    params.migrationBucketSecretManager.grantRead(this.flywayLambdaMigration);
   }
 }
