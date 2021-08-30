@@ -39,7 +39,7 @@ npmjs: https://www.npmjs.com/package/flywaymigrationconstruct
 ## NB : 
 Flyway Migration Construct manages the lambda function permissions for the secret and the bucket. 
 
-Warning : Version 0.2.0 only allows Redshift DB
+Warning : Version 0.2.0 only allows DB on Amazon Redshift
 
 
 
