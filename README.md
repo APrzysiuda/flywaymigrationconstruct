@@ -1,18 +1,18 @@
 # AWS Lambda function with Flyway
 ## Flyway --> Migrate/Evolve your database schema
-Flyway is an opensource tool to evolve easily your db : https://flywaydb.org/
+Flyway is an opensource tool to easily evolve your db : https://flywaydb.org/
 
 ## Flyway Migration Construct 
-This AWS CDK construct allows you to evolve your db schema with a lambda function. 
+This AWS CDK construct allows you to scale your db schema with a lambda function. 
 
-The lambda function code is upload on "flywaymigrationconstruct" S3 bucket. The construct get the code on it according
-to the construct version. 
+The lambda function code is upload on S3 bucket "flywaymigrationconstruct". The construct retrieves the code on it according
+to the version of the construct. 
 
-You must pass arguments, most of them are optional and are params of our lambda function except two of them,
+You must pass arguments, most of which are optional and are parameters of your lambda function except two of them,
 which are environment variables. 
 
 ## Migration DB SecretManager 
-Migration DB SecretManager is the Secret of the DB that you want to manage with Flyway. 
+Migration DB SecretManager is the Secret of the DB you want to manage with Flyway. 
 It has to have 6 arguments : 
 
 username : the username of your DB
@@ -37,12 +37,9 @@ PyPI: https://pypi.org/project/flywaymigrationconstruct/
 npmjs: https://www.npmjs.com/package/flywaymigrationconstruct
 
 ## NB : 
-Flyway Migration Construct manages authorizations of the lambda function for the secret and the bucket. 
+Flyway Migration Construct manages the lambda function permissions for the secret and the bucket. 
 
 Warning : Version 0.2.0 only allows Redshift DB
 
-## Credits: 
-
-Arnaud Przysiuda, internship at Necko Technologies. https://www.necko.tech/en/
 
 
