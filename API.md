@@ -78,33 +78,15 @@ import { FlywayConstructParams } from 'flywaymigrationconstruct'
 const flywayConstructParams: FlywayConstructParams = { ... }
 ```
 
-##### `bucket`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.bucket"></a>
+##### `bucketMigrationSQL`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.bucketMigrationSQL"></a>
 
 - *Type:* [`@aws-cdk/aws-s3.IBucket`](#@aws-cdk/aws-s3.IBucket)
 
 ---
 
-##### `migrationBucketSecretManager`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.migrationBucketSecretManager"></a>
+##### `migrationDBSecretManager`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.migrationDBSecretManager"></a>
 
 - *Type:* [`@aws-cdk/aws-secretsmanager.ISecret`](#@aws-cdk/aws-secretsmanager.ISecret)
-
----
-
-##### `securityGroups`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.securityGroups"></a>
-
-- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
-
----
-
-##### `subnet`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.subnet"></a>
-
-- *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
-
----
-
-##### `vpc`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.vpc"></a>
-
-- *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 
@@ -114,9 +96,27 @@ const flywayConstructParams: FlywayConstructParams = { ... }
 
 ---
 
+##### `securityGroups`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.securityGroups"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+
+---
+
+##### `subnet`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.subnet"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
+
+---
+
 ##### `timeout`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.timeout"></a>
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
+
+---
+
+##### `vpc`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.vpc"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 

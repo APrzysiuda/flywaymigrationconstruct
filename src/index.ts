@@ -8,11 +8,11 @@ import * as cdk from '@aws-cdk/core';
 
 
 export interface FlywayConstructParams {
-  readonly vpc: ec2.IVpc;
-  readonly subnet: ec2.SubnetSelection;
-  readonly migrationBucketSecretManager: awssecret.ISecret;
-  readonly bucket: s3.IBucket;
-  readonly securityGroups: ec2.ISecurityGroup[];
+  readonly migrationDBSecretManager: awssecret.ISecret;
+  readonly bucketMigrationSQL: s3.IBucket;
+  readonly vpc?: ec2.IVpc;
+  readonly subnet?: ec2.SubnetSelection;
+  readonly securityGroups?: ec2.ISecurityGroup[];
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
 }
@@ -21,7 +21,7 @@ export class FlywayConstruct extends cdk.Construct {
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
   static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
-  static readonly OBJECT_CODE_KEY = 'flywayjar.0.1.0.zip';
+  static readonly OBJECT_CODE_KEY = 'flywayjar.0.2.0.zip';
 
   flywayLambdaMigration: awsLambda.Function;
 
@@ -39,12 +39,13 @@ export class FlywayConstruct extends cdk.Construct {
       handler: FlywayConstruct.HANDLER,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
-        ARN: params.migrationBucketSecretManager.secretArn,
-        BUCKET_NAME: params.bucket.bucketName,
+        ARN: params.migrationDBSecretManager.secretArn,
+        BUCKET_NAME: params.bucketMigrationSQL.bucketName,
       },
       code: awsLambda.S3Code.fromBucket(
         s3.Bucket.fromBucketArn(this, FlywayConstruct.ID_LAMBDA_CODE, FlywayConstruct.BUCKET_CODE_ARN), FlywayConstruct.OBJECT_CODE_KEY),
     });
-    params.migrationBucketSecretManager.grantRead(this.flywayLambdaMigration);
+    params.migrationDBSecretManager.grantRead(this.flywayLambdaMigration);
+    params.bucketMigrationSQL.grantRead(this.flywayLambdaMigration);
   }
 }
