@@ -2,7 +2,7 @@
 ## Flyway --> Migrate/Evolve your database schema
 Flyway is an opensource tool to evolve easily your db : https://flywaydb.org/
 
-##Flyway Migration Construct 
+## Flyway Migration Construct 
 This AWS CDK construct allows you to evolve your db schema with a lambda function. 
 
 The lambda function code is upload on "flywaymigrationconstruct" S3 bucket. The construct get the code on it according
@@ -41,7 +41,7 @@ Flyway Migration Construct manages authorizations of the lambda function for the
 
 Warning : Version 0.2.0 only allows Redshift DB
 
-##Credits: 
+## Credits: 
 
 Arnaud Przysiuda, internship at Necko Technologies. https://www.necko.tech/en/
 
