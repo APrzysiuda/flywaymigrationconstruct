@@ -43,6 +43,6 @@ Warning : Version 0.2.0 only allows Redshift DB
 
 ##Credits: 
 
-Arnaud Przysiuda, internship at Necko Technologies. 
+Arnaud Przysiuda, internship at Necko Technologies. https://www.necko.tech/en/
 
 
