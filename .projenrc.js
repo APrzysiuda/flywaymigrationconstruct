@@ -14,6 +14,7 @@ const project = new AwsCdkConstructLibrary({
   docgen: true,
   eslint: true,
   releaseToNpm: true,
+  keywords: ['cdk', 'flyway', 'DB'],
   releaseWorkflow: true,
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
