@@ -15,7 +15,7 @@ import tech.necko.flywayjar.ClientException;
 
 public class S3Client{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(S3Client.class);
 
     //S3client
     public AmazonS3 s3Client=AmazonS3ClientBuilder.standard().build();
