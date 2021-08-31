@@ -3,9 +3,8 @@ import * as awsLambda from '@aws-cdk/aws-lambda';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as awssecret from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
-
-//version : 0.1.0
-
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const pjson= require('/package.json');
 
 export interface FlywayConstructParams {
   readonly migrationDBSecretManager: awssecret.ISecret;
@@ -21,8 +20,7 @@ export class FlywayConstruct extends cdk.Construct {
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
   static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
-  static readonly OBJECT_CODE_KEY = 'flywayjar.0.2.0.zip'; // git variable d'environnement
-
+  static readonly OBJECT_CODE_KEY = pjson.version;
   flywayLambdaMigration: awsLambda.Function;
 
   constructor(scope: cdk.Construct,

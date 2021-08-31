@@ -62,7 +62,7 @@ new FlywayConstruct(scope: Construct, id: string, params: FlywayConstructParams)
 
 ##### `OBJECT_CODE_KEY` <a name="flywaymigrationconstruct.FlywayConstruct.property.OBJECT_CODE_KEY"></a>
 
-- *Type:* `string`
+- *Type:* `any`
 
 ---
 
