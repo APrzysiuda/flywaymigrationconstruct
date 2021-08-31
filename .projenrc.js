@@ -86,7 +86,6 @@ project.release.addJobs({
 });
 
 
-
 project.gitignore.exclude('.idea/');
 project.gitignore.exclude('flywayjar/build/');
 project.addPackageIgnore('flywayjar/');
