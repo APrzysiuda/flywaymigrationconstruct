@@ -20,7 +20,7 @@ export class FlywayConstruct extends cdk.Construct {
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
   static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
-  static readonly OBJECT_CODE_KEY = pjson.version;
+  OBJECT_CODE_KEY = pjson.version;
   flywayLambdaMigration: awsLambda.Function;
 
   constructor(scope: cdk.Construct,
@@ -41,7 +41,7 @@ export class FlywayConstruct extends cdk.Construct {
         BUCKET_NAME: params.bucketMigrationSQL.bucketName,
       },
       code: awsLambda.S3Code.fromBucket(
-        s3.Bucket.fromBucketArn(this, FlywayConstruct.ID_LAMBDA_CODE, FlywayConstruct.BUCKET_CODE_ARN), FlywayConstruct.OBJECT_CODE_KEY),
+        s3.Bucket.fromBucketArn(this, FlywayConstruct.ID_LAMBDA_CODE, FlywayConstruct.BUCKET_CODE_ARN), 'flywayjar.'+this.OBJECT_CODE_KEY+'.zip'),
     });
     params.migrationDBSecretManager.grantRead(this.flywayLambdaMigration);
     params.bucketMigrationSQL.grantRead(this.flywayLambdaMigration);
