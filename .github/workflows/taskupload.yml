@@ -5,7 +5,6 @@ on:
   push:
     tags:
       - v*.*.*
-    branches: main
   workflow_dispatch: {}
 jobs:
   upload:
@@ -17,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: checkout
+      - name: Show GitHub ref
+        run: echo "$GITHUB_REF"
       - name: Get the version
         id: get_version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}

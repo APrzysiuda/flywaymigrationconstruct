@@ -30,7 +30,6 @@ task1.on({
     tags: [
       'v*.*.*',
     ],
-    branches: 'main',
   },
   workflowDispatch: {},
 });
@@ -46,6 +45,10 @@ task1.addJobs({
       {
         uses: 'actions/checkout@v2',
         name: 'checkout',
+      },
+      {
+        name: 'Show GitHub ref',
+        run: 'echo "$GITHUB_REF"',
       },
       {
         name: 'Get the version',
