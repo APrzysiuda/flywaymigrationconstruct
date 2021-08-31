@@ -12,7 +12,7 @@ export interface FlywayConstructParams {
   readonly bucketMigrationSQL: s3.IBucket;
   readonly vpc?: ec2.IVpc;
   readonly subnet?: ec2.SubnetSelection;
-  readonly securityGroups?: ec2.ISecurityGroup[];
+  readonly securityGroups?: ec2.ISecurityGroup[]; // mettre à jour pour faire en lien
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
 }
@@ -21,7 +21,7 @@ export class FlywayConstruct extends cdk.Construct {
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
   static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
-  static readonly OBJECT_CODE_KEY = 'flywayjar.0.2.0.zip';
+  static readonly OBJECT_CODE_KEY = 'flywayjar.0.2.0.zip'; // git variable d'environnement
 
   flywayLambdaMigration: awsLambda.Function;
 
