@@ -1,6 +1,8 @@
 buildscript {
     dependencies {
         classpath 'com.amazon.redshift:redshift-jdbc42:2.0.0.7'
+        classpath 'org.postgresql:postgresql:42.2.14'
+        classpath 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
     }
 }
 
@@ -47,7 +49,7 @@ dependencies {
     runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     implementation 'org.postgresql:postgresql:42.2.14'
-    compileOnly 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
+    implementation 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
 
 }
 
