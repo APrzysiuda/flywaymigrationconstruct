@@ -17,7 +17,7 @@ jobs:
         name: checkout
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/*/
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/*/}
       - run: cd ./flywayjar
       - uses: actions/checkout@v2
         name: checkout2

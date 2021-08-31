@@ -47,7 +47,7 @@ task1.addJobs({
       {
         name: 'Get the version',
         id: 'get_version',
-        run: 'echo ::set-output name=VERSION::${GITHUB_REF#refs/*/',
+        run: 'echo ::set-output name=VERSION::${GITHUB_REF#refs/*/}',
       },
       {
         run: 'cd ./flywayjar',
