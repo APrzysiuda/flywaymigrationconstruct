@@ -23,8 +23,58 @@ const project = new AwsCdkConstructLibrary({
   releaseEveryCommit: true,
 });
 
-
-const task1= project.github.addWorkflow('taskUpload');
+project.release.addJobs({
+  upload: {
+    runsOn: 'ubuntu-latest',
+    permissions: {
+      contents: 'write',
+      packages: 'write',
+      actions: 'write',
+    },
+    steps: [
+      {
+        uses: 'actions/checkout@v2',
+        name: 'checkout',
+      },
+      {
+        name: 'Show GitHub ref',
+        run: 'echo "$GITHUB_REF"',
+      },
+      {
+        name: 'Get the version',
+        id: 'get_version',
+        run: 'echo ::set-output name=tag::${GITHUB_REF#refs/tags/}',
+      },
+      {
+        run: 'cd ./flywayjar',
+      },
+      {
+        uses: 'actions/checkout@v2',
+        name: 'checkout2',
+      },
+      {
+        'run': 'gradle build && gradle buildZip',
+        'working-directory': './flywayjar',
+      },
+      {
+        uses: 'actions/upload-artifact@v1',
+        with: {
+          name: 'upload change',
+          path: './flywayjar',
+        },
+      },
+      {
+        name: 'run upload !',
+        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.${{steps.get_version.tag}}.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
+        env: {
+          AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
+          AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',
+        },
+      },
+    ],
+  },
+});
+/*const task1= project.github.addWorkflow('taskUpload');
 task1.on({
   push: {
     tags: [
@@ -83,7 +133,7 @@ task1.addJobs({
       },
     ],
   },
-});
+});*/
 
 
 project.gitignore.exclude('.idea/');
