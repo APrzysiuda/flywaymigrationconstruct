@@ -25,6 +25,7 @@ const project = new AwsCdkConstructLibrary({
 
 project.release.addJobs({
   upload: {
+    needs: 'release',
     runsOn: 'ubuntu-latest',
     permissions: {
       contents: 'write',
