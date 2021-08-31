@@ -45,14 +45,9 @@ task1.addJobs({
         name: 'checkout',
       },
       {
-        name: 'shox ref',
-        id: 'ref',
-        run: 'echo "$GITHUB_REF"',
-      },
-      {
         name: 'Get the version',
         id: 'get_version',
-        run: 'echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}',
+        run: 'echo ::set-output name=VERSION::$(git describe --tags)',
       },
       {
         run: 'cd ./flywayjar',
