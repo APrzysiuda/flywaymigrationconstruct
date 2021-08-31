@@ -47,7 +47,7 @@ task1.addJobs({
       {
         name: 'Get the version',
         id: 'get_version',
-        run: 'echo ::set-output name=VERSION::$(git describe --tags)',
+        run: 'echo "GIT_TAG=`echo $(git describe --tags)`" >> $GITHUB_ENV',
       },
       {
         run: 'cd ./flywayjar',
@@ -69,7 +69,7 @@ task1.addJobs({
       },
       {
         name: 'run upload !',
-        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.${{steps.get_version.outputs.VERSION}}.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
+        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.${{GIT_TAG}}.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
         env: {
           AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
           AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',
