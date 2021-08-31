@@ -30,7 +30,6 @@ task1.on({
     tags: [
       'v*.*.*',
     ],
-    branches: 'main',
   },
   workflowDispatch: {},
 });
