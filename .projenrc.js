@@ -31,6 +31,7 @@ project.release.addJobs({
       packages: 'write',
       actions: 'write',
     },
+    if: 'needs.release.outputs.latest_commit == github.sha',
     steps: [
       {
         uses: 'actions/checkout@v2',
@@ -64,8 +65,16 @@ project.release.addJobs({
         },
       },
       {
+        name: 'donwload',
+        uses: 'actions/download-artifact@v2',
+        with: {
+          name: 'dist',
+          path: 'dist',
+        },
+      },
+      {
         name: 'run upload !',
-        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.${{steps.get_version.tag}}.zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
+        run: 'export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp ./flywayjar/build/distributions/flywayjar-1.0.0.zip ./temp/flywayjar.v$(cat dist/version.txt).zip && aws s3 sync ./temp/ s3://flywaymigrationconstruct',
         env: {
           AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}',
           AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',

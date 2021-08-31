@@ -105,6 +105,7 @@ jobs:
       contents: write
       packages: write
       actions: write
+    if: needs.release.outputs.latest_commit == github.sha
     steps:
       - uses: actions/checkout@v2
         name: checkout
@@ -122,10 +123,15 @@ jobs:
         with:
           name: upload change
           path: ./flywayjar
+      - name: donwload
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
       - name: run upload !
         run: export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp
           ./flywayjar/build/distributions/flywayjar-1.0.0.zip
-          ./temp/flywayjar.${{steps.get_version.tag}}.zip && aws s3 sync ./temp/
+          ./temp/flywayjar.v$(cat dist/version.txt).zip && aws s3 sync ./temp/
           s3://flywaymigrationconstruct
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
