@@ -53,7 +53,15 @@ public class Main {
         String port = jsonSecret.get("port").getAsString();
         String dbname = jsonSecret.get("dbname").getAsString();
         String engine = jsonSecret.get("engine").getAsString();
-        String url = "jdbc:" + engine + "://" + host + ":" + port + "/" + dbname;
+
+        // for SAP jdbc url
+        String url = "jdbc:" + engine + "://" + host + ":" + port + "/";
+        if (engine=="sap") {
+            url= url +"?databaseName="+ dbname;
+        }
+        else {
+            url = url+ dbname;
+        };
 
 
         LOGGER.debug(url);

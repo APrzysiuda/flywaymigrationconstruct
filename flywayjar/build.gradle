@@ -46,6 +46,8 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
     runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+    implementation 'org.postgresql:postgresql:42.2.14'
+    compileOnly 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
 
 }
 
