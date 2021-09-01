@@ -28,9 +28,9 @@ export class FlywayConstruct extends cdk.Construct {
     params: FlywayConstructParams,
   ) {
     super(scope, id);
-    if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
+    /*if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
       console.error('vpc have to be defined');
-    };
+    }*/
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
       vpc: params.vpc,
       vpcSubnets: params.subnet,

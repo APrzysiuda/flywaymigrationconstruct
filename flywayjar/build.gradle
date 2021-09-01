@@ -3,6 +3,7 @@ buildscript {
         classpath 'com.amazon.redshift:redshift-jdbc42:2.0.0.7'
         classpath 'org.postgresql:postgresql:42.2.14'
         classpath 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
+        classpath 'mysql:mysql-connector-java:8.0.26'
     }
 }
 
@@ -50,6 +51,7 @@ dependencies {
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     implementation 'org.postgresql:postgresql:42.2.14'
     implementation 'com.sap.cloud.db.jdbc:ngdbc:2.9.16'
+    implementation 'mysql:mysql-connector-java:8.0.26'
 
 }
 
