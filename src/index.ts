@@ -9,9 +9,11 @@ const pjson= require('../package.json');
 export interface FlywayConstructParams {
   readonly migrationDBSecretManager: awssecret.ISecret;
   readonly bucketMigrationSQL: s3.IBucket;
-  readonly vpc?: ec2.IVpc;
-  readonly subnet?: ec2.SubnetSelection;
-  readonly securityGroups?: ec2.ISecurityGroup[]; // mettre à jour pour faire en lien
+  readonly vpcConfig?:{
+    readonly vpc: ec2.IVpc;
+    readonly subnet?: ec2.SubnetSelection;
+    readonly securityGroups?: ec2.ISecurityGroup[];
+  };
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
 }
@@ -29,9 +31,9 @@ export class FlywayConstruct extends cdk.Construct {
   ) {
     super(scope, id);
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
-      vpc: params.vpc,
-      vpcSubnets: params.subnet,
-      securityGroups: params.securityGroups,
+      vpc: params.vpcConfig?.vpc,
+      vpcSubnets: params.vpcConfig?.subnet,
+      securityGroups: params.vpcConfig?.securityGroups,
       memorySize: params.memorySize || 512,
       timeout: params.timeout || cdk.Duration.seconds(30),
       handler: FlywayConstruct.HANDLER,
