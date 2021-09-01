@@ -15,7 +15,7 @@ export interface FlywayConstructParams {
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
 }
-export class FlywayConstruct extends cdk.Construct {
+export class FlywayConstruct extends cdk.Construct{
 
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
@@ -28,9 +28,9 @@ export class FlywayConstruct extends cdk.Construct {
     params: FlywayConstructParams,
   ) {
     super(scope, id);
-    /*if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
-      console.error('vpc have to be defined');
-    }*/
+    if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
+      throw new Error('you cant pass subnet or securitygroup without vpc');
+    }
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
       vpc: params.vpc,
       vpcSubnets: params.subnet,
