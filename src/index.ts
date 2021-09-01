@@ -4,7 +4,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as awssecret from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const pjson= require('/package.json');
+const pjson= require('../package.json');
 
 export interface FlywayConstructParams {
   readonly migrationDBSecretManager: awssecret.ISecret;
