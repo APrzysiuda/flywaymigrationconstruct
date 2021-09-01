@@ -15,7 +15,7 @@ export interface FlywayConstructParams {
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
 }
-export class FlywayConstruct extends cdk.Construct{
+export class FlywayConstruct extends cdk.Construct {
 
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
