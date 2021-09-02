@@ -11,6 +11,8 @@ to the version of the construct.
 You must pass arguments, most of which are optional and are parameters of your lambda function except two of them,
 which are environment variables. 
 
+warning: vpc, subnet and securitygroups are optional, but if one of them is provided, others must be too. 
+
 ## Migration DB SecretManager 
 Migration DB SecretManager is the Secret of the DB you want to manage with Flyway. 
 It has to have 6 arguments : 
@@ -27,6 +29,7 @@ port: the port of your DB
 
 dbname: the name of your DB
 
+
 ## Bucket Migration SQL
 Bucket Migration SQL is the S3 Bucket where you will put your SQL files 
 (warning : you have to comply with the naming pattern of Flyway). 
@@ -39,7 +42,7 @@ npmjs: https://www.npmjs.com/package/flywaymigrationconstruct
 ## NB : 
 Flyway Migration Construct manages the lambda function permissions for the secret and the bucket. 
 
-Warning : Version 0.2.0 only allows DB on Amazon Redshift
+Warning : Version 0.3.0 only allows DB on Amazon Redshift, MySQL, PostgreSQL and SAP HANA.
 
 
 
