@@ -25,7 +25,7 @@ public class S3Client{
         LOGGER.info("in getBucketObjectSummaries");
         List<S3ObjectSummary> s3ObjectSummaries = new ArrayList<S3ObjectSummary>();
         try {
-            ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request().withBucketName(bucketName);
+            ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request().withBucketName(bucketName);//add with prefix
             ListObjectsV2Result objectListing;
 
             do {
@@ -61,7 +61,7 @@ public class S3Client{
     public List<String> getBucketObjectNames(String bucketName) throws ClientException {
         List<String> s3ObjectNames = new ArrayList<String>();
         LOGGER.info("in getBucketObjectNames");
-        List<S3ObjectSummary> s3ObjectSummaries = getBucketObjectSummaries(bucketName);
+        List<S3ObjectSummary> s3ObjectSummaries = getBucketObjectSummaries(bucketName);//add prefix
 
         for (S3ObjectSummary s3ObjectSummary : s3ObjectSummaries) {
             s3ObjectNames.add(s3ObjectSummary.getKey());

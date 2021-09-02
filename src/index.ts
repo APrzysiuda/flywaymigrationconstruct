@@ -14,6 +14,7 @@ export interface FlywayConstructParams {
   readonly securityGroups?: ec2.ISecurityGroup[];
   readonly memorySize?: number;
   readonly timeout?: cdk.Duration;
+  //add readonly bucketFolderPrefix? : string;
 }
 export class FlywayConstruct extends cdk.Construct {
 
@@ -43,6 +44,7 @@ export class FlywayConstruct extends cdk.Construct {
       handler: FlywayConstruct.HANDLER,
       runtime: awsLambda.Runtime.JAVA_11,
       environment: {
+        //add PREFIX: params.bucketFolderPrefix || ''
         ARN: params.migrationDBSecretManager.secretArn,
         BUCKET_NAME: params.bucketMigrationSQL.bucketName,
       },

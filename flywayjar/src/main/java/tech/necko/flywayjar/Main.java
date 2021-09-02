@@ -27,6 +27,7 @@ public class Main {
         //parameter
         String bucketName = System.getenv("BUCKET_NAME");
         String arn = System.getenv("ARN");
+        //add string prefix = System.getenv("PREFIX");
 
         //SecretsManager
         AWSSecretsManagerClientBuilder secretsManager = AWSSecretsManagerClientBuilder.standard();
@@ -71,7 +72,7 @@ public class Main {
         //S3Client
         S3Client client = new S3Client();
         LOGGER.info("Client created");
-        List<String> objectList = client.getBucketObjectNames(bucketName);
+        List<String> objectList = client.getBucketObjectNames(bucketName); //add prefix
         LOGGER.info("Loop start");
         //save object in tmp
         for (String objectName : objectList) {
