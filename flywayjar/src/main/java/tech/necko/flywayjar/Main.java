@@ -26,6 +26,7 @@ public class Main {
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
         String bucketName = System.getenv("BUCKET_NAME");
+        String mehdi = "ceci-est une mise à jour de mon build pour montrer à mehdi";
         String arn = System.getenv("ARN");
         //add string prefix = System.getenv("PREFIX");
 
