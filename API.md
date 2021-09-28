@@ -4,7 +4,7 @@
 
 ### FlywayConstruct <a name="flywaymigrationconstruct.FlywayConstruct"></a>
 
-#### Initializer <a name="flywaymigrationconstruct.FlywayConstruct.Initializer"></a>
+#### Initializers <a name="flywaymigrationconstruct.FlywayConstruct.Initializer"></a>
 
 ```typescript
 import { FlywayConstruct } from 'flywaymigrationconstruct'
@@ -36,11 +36,19 @@ new FlywayConstruct(scope: Construct, id: string, params: FlywayConstructParams)
 
 ##### `flywayLambdaMigration`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.flywayLambdaMigration"></a>
 
+```typescript
+public readonly flywayLambdaMigration: Function;
+```
+
 - *Type:* [`@aws-cdk/aws-lambda.Function`](#@aws-cdk/aws-lambda.Function)
 
 ---
 
 ##### `objectCodeKey`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstruct.property.objectCodeKey"></a>
+
+```typescript
+public readonly objectCodeKey: any;
+```
 
 - *Type:* `any`
 
@@ -80,11 +88,19 @@ const flywayConstructParams: FlywayConstructParams = { ... }
 
 ##### `bucketMigrationSQL`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.bucketMigrationSQL"></a>
 
+```typescript
+public readonly bucketMigrationSQL: IBucket;
+```
+
 - *Type:* [`@aws-cdk/aws-s3.IBucket`](#@aws-cdk/aws-s3.IBucket)
 
 ---
 
 ##### `migrationDBSecretManager`<sup>Required</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.migrationDBSecretManager"></a>
+
+```typescript
+public readonly migrationDBSecretManager: ISecret;
+```
 
 - *Type:* [`@aws-cdk/aws-secretsmanager.ISecret`](#@aws-cdk/aws-secretsmanager.ISecret)
 
@@ -92,11 +108,19 @@ const flywayConstructParams: FlywayConstructParams = { ... }
 
 ##### `memorySize`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.memorySize"></a>
 
+```typescript
+public readonly memorySize: number;
+```
+
 - *Type:* `number`
 
 ---
 
 ##### `securityGroups`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.securityGroups"></a>
+
+```typescript
+public readonly securityGroups: ISecurityGroup[];
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 
@@ -104,17 +128,29 @@ const flywayConstructParams: FlywayConstructParams = { ... }
 
 ##### `subnet`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.subnet"></a>
 
+```typescript
+public readonly subnet: SubnetSelection;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
 
 ---
 
 ##### `timeout`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.timeout"></a>
 
+```typescript
+public readonly timeout: Duration;
+```
+
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 
 ---
 
 ##### `vpc`<sup>Optional</sup> <a name="flywaymigrationconstruct.FlywayConstructParams.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
