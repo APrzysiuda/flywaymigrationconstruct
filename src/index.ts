@@ -4,7 +4,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as awssecret from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const pjson= require('../package.json');
+const pjson = require('../package.json');
 
 export interface FlywayConstructParams {
     readonly migrationDBSecretManager: awssecret.ISecret;
@@ -16,6 +16,7 @@ export interface FlywayConstructParams {
     readonly timeout?: cdk.Duration;
     //add readonly bucketFolderPrefix? : string;
 }
+
 export class FlywayConstruct extends cdk.Construct {
 
     static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
@@ -29,11 +30,11 @@ export class FlywayConstruct extends cdk.Construct {
                 params: FlywayConstructParams,
     ) {
         super(scope, id);
-        if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
-            throw new Error('you cant pass subnet or securitygroup without vpc');
-        }
-        if (!(typeof params.subnet !== 'undefined') || !(typeof params.securityGroups !== 'undefined') && typeof params.vpc !=='undefined') {
+        if (params.vpc && (!params.subnet || !params.securityGroups)) {
             throw new Error('you cant pass vpc without subnet and securityGroups');
+        }
+        if ((params.securityGroups || params.subnet) && !params.vpc) {
+            throw new Error('you cant pass subnet or securitygroup without vpc');
         }
         this.flywayLambdaMigration = new awsLambda.Function(this, id, {
             vpc: params.vpc,
@@ -49,7 +50,7 @@ export class FlywayConstruct extends cdk.Construct {
                 BUCKET_NAME: params.bucketMigrationSQL.bucketName,
             },
             code: awsLambda.S3Code.fromBucket(
-                s3.Bucket.fromBucketArn(this, FlywayConstruct.ID_LAMBDA_CODE, FlywayConstruct.BUCKET_CODE_ARN), 'flywayjar.'+this.objectCodeKey+'.zip'),
+                s3.Bucket.fromBucketArn(this, FlywayConstruct.ID_LAMBDA_CODE, FlywayConstruct.BUCKET_CODE_ARN), 'flywayjar.' + this.objectCodeKey + '.zip'),
         });
         params.migrationDBSecretManager.grantRead(this.flywayLambdaMigration);
         params.bucketMigrationSQL.grantRead(this.flywayLambdaMigration);
