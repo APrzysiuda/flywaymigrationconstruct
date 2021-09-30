@@ -30,12 +30,6 @@ export class FlywayConstruct extends cdk.Construct {
     params: FlywayConstructParams,
   ) {
     super(scope, id);
-    if (params.vpc && (!params.subnet || !params.securityGroups)) {
-      throw new Error('you cant pass vpc without subnet and securityGroups');
-    }
-    if ((params.securityGroups || params.subnet) && !params.vpc) {
-      throw new Error('you cant pass subnet or securitygroup without vpc');
-    }
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
       vpc: params.vpc,
       vpcSubnets: params.subnet,
