@@ -6,6 +6,12 @@ import * as cdk from '@aws-cdk/core';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const pjson= require('../package.json');
 
+
+export interface VPCParams{
+  readonly vpc: ec2.IVpc;
+  readonly subnet: ec2.SubnetSelection;
+  readonly securityGroups: ec2.ISecurityGroup[];
+}
 export interface FlywayConstructParams {
   readonly migrationDBSecretManager: awssecret.ISecret;
   readonly bucketMigrationSQL: s3.IBucket;
@@ -29,10 +35,12 @@ export class FlywayConstruct extends cdk.Construct {
     params: FlywayConstructParams,
   ) {
     super(scope, id);
-    if (typeof params.subnet !== 'undefined' || typeof params.securityGroups !== 'undefined' && !(typeof params.vpc !=='undefined')) {
+
+
+    if ((params.subnet || params.securityGroups) && !params.vpc){
       throw new Error('you cant pass subnet or securitygroup without vpc');
     }
-    if (!(typeof params.subnet !== 'undefined') || !(typeof params.securityGroups !== 'undefined') && typeof params.vpc !=='undefined') {
+    if ((!params.subnet || !params.securityGroups) && params.vpc) {
       throw new Error('you cant pass vpc without subnet and securityGroups');
     }
     this.flywayLambdaMigration = new awsLambda.Function(this, id, {
