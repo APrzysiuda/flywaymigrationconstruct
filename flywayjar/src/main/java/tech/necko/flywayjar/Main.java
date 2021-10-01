@@ -47,7 +47,7 @@ public class Main {
         } catch (InvalidParameterException e) {
             throw new ClientException("The request had invalid params: " + e.getMessage());
         }
-
+        System.out.println("Sortie de mon try catch")
 
         String secret = getSecretValueResult.getSecretString();
 
