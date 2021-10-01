@@ -8,8 +8,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.secretsmanager.*;
 import com.amazonaws.services.secretsmanager.model.*;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import tech.necko.flywayjar.S3Client;
 import tech.necko.flywayjar.ClientException;
 
 public class Main {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
         String bucketName = System.getenv("BUCKET_NAME");
@@ -66,22 +66,22 @@ public class Main {
         };
 
 
-        LOGGER.debug(url);
+        //LOGGER.debug(url);
         //path for files (always tmp for flyway)
         Path outputPath = Paths.get("/tmp");
-        LOGGER.info("S3 client initialization");
+        System.out.println("S3 client initialization");
         //S3Client
         S3Client client = new S3Client();
-        LOGGER.info("Client created");
+        //LOGGER.info("Client created");
         List<String> objectList = client.getBucketObjectNames(bucketName); //add prefix
-        LOGGER.info("Loop start");
+        //LOGGER.info("Loop start");
         //save object in tmp
         for (String objectName : objectList) {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);
             String path = "/tmp/" + objectName;
             client.s3Client.getObject(getObjectRequest, new File(path));
         }
-        LOGGER.info("migration initialization");
+        //LOGGER.info("migration initialization");
         //configure flyway with
         Flyway flyway = Flyway.configure().dataSource(url, username, password).locations("filesystem:/tmp/").load();
         // Start the migration
