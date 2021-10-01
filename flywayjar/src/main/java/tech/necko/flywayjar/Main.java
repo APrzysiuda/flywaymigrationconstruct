@@ -25,20 +25,20 @@ public class Main {
     //private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
-        System.out.log("entrez dans mon handler")
+        System.out.println("entrez dans mon handler");
         String bucketName = System.getenv("BUCKET_NAME");
         String mehdi = "ceci-est une mise à jour de mon build pour montrer à mehdi";
         String arn = System.getenv("ARN");
         //add string prefix = System.getenv("PREFIX");
 
         //SecretsManager
-        System.out.log(arn)
+        System.out.println(arn);
         AWSSecretsManagerClientBuilder secretsManager = AWSSecretsManagerClientBuilder.standard();
         AWSSecretsManager clientManager = secretsManager.build();
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(arn);
         GetSecretValueResult getSecretValueResult = null;
         try {
-            System.out.println("entrez dans mon try catch")
+            System.out.println("entrez dans mon try catch");
             getSecretValueResult = clientManager.getSecretValue(getSecretValueRequest);
         } catch (ResourceNotFoundException e) {
             throw new ClientException("The requested secret " + arn + " was not found");
@@ -53,7 +53,7 @@ public class Main {
 
         JsonObject jsonSecret = new Gson().fromJson(secret, JsonObject.class);
         String password = jsonSecret.get("password").getAsString();
-        System.out.println(password)
+        System.out.println(password);
         String username = jsonSecret.get("username").getAsString();
         String host = jsonSecret.get("host").getAsString();
         String port = jsonSecret.get("port").getAsString();
