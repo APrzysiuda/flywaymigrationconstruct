@@ -40,6 +40,7 @@ public class Main {
         try {
             System.out.println("entrez dans mon try catch");
             getSecretValueResult = clientManager.getSecretValue(getSecretValueRequest);
+            System.out.println(getSecretValueResult);
         } catch (ResourceNotFoundException e) {
             throw new ClientException("The requested secret " + arn + " was not found");
         } catch (InvalidRequestException e) {
@@ -47,7 +48,8 @@ public class Main {
         } catch (InvalidParameterException e) {
             throw new ClientException("The request had invalid params: " + e.getMessage());
         }
-        System.out.println("Sortie de mon try catch")
+        System.out.println("Sortie de mon try catch");
+
 
         String secret = getSecretValueResult.getSecretString();
 
