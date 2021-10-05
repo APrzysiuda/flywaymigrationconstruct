@@ -85,7 +85,7 @@ project.release.addJobs({
   },
 });
 project.buildWorkflow.addJobs( {
-  build_monocdk:{
+  build_monocdk: {
     needs: 'build',
     runsOn: 'ubuntu-latest',
     permissions: {
@@ -93,24 +93,24 @@ project.buildWorkflow.addJobs( {
       packages: 'write',
       actions: 'write',
     },
-    steps:[
-      {run: 'yarn install --check-files --frozen-lockfile'},
-      {run: 'rm yarn.lock'},
-      {run: 'rm .projenrc.js'},
-      {run: 'mv .projenrc.monocdk.js .projenrc.js'},
-      {run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'"},
-      {run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'"},
-      {run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'"},
-      {run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'"},
-      {run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'"},
-      {run: "npx projen"},
-      {run: "git config --global user.email gilab-runner@gitlab.com"},
-      {run: 'git config --global user.name "Auto-bump"'},
-      {run: 'npx projen test'},
-      {run: 'npx jsii --silence-warnings=reserved-word --no-fix-peer-dependencies'},
-      {run: 'npx jsii-docgen'},
-      {run: 'npx jsii-pacmak'},
-    ]
+    steps: [
+      { run: 'yarn install --check-files --frozen-lockfile' },
+      { run: 'rm yarn.lock' },
+      { run: 'rm .projenrc.js' },
+      { run: 'mv .projenrc.monocdk.js .projenrc.js' },
+      { run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
+      { run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
+      { run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
+      { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
+      { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
+      { run: 'npx projen' },
+      { run: 'git config --global user.email gilab-runner@gitlab.com' },
+      { run: 'git config --global user.name "Auto-bump"' },
+      { run: 'npx projen test' },
+      { run: 'npx jsii --silence-warnings=reserved-word --no-fix-peer-dependencies' },
+      { run: 'npx jsii-docgen' },
+      { run: 'npx jsii-pacmak' },
+    ],
   },
 });
 
