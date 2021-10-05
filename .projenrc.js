@@ -1,4 +1,4 @@
-const { AwsCdkConstructLibrary, ProjectType, github, git, IgnoreFile } = require('projen');
+const { AwsCdkConstructLibrary, ProjectType, git, IgnoreFile } = require('projen');
 const { workflows, GithubWorkflow } = require('projen/lib/github');
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
