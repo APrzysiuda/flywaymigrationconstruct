@@ -35,6 +35,7 @@ jobs:
       - run: find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
       - run: find ./test -type f | xargs sed
           -i  's,monocdk/assert,@monocdk-experiment/assert,g'
+      - run: npx projen
       - name: release
         run: npx projen release
       - name: Check for new commits

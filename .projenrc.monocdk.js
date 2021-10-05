@@ -24,7 +24,8 @@ const project = new AwsCdkConstructLibrary({
     { run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
     { run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
     { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
-    { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },],
+    { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
+    { run : "npx projen"}],
   releaseWorkflow: true,
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
