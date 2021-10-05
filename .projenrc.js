@@ -13,6 +13,7 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
   eslint: true,
+  devDeps: ['monocdk'],
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
   releaseWorkflowSetupSteps:[{ run: 'yarn install --check-files --frozen-lockfile' },
@@ -90,28 +91,6 @@ project.release.addJobs({
           AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}',
         },
       },
-    ],
-  },
-});
-project.release.addJobs( {
-  build_monocdk: {
-    needs: 'build',
-    runsOn: 'ubuntu-latest',
-    permissions: {
-      contents: 'write',
-      packages: 'write',
-      actions: 'write',
-    },
-    steps: [
-      { run: 'yarn install --check-files --frozen-lockfile' },
-      { run: 'rm yarn.lock' },
-      { run: 'rm .projenrc.js' },
-      { run: 'mv .projenrc.monocdk.js .projenrc.js' },
-      { run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
-      { run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
-      { run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
-      { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
-      { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
     ],
   },
 });
