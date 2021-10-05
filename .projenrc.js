@@ -5,7 +5,7 @@ const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
   cdkVersion: '1.125.0',
-  minNodeVersion: '14.0.0',
+  minNodeVersion: '14.15.0',
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',

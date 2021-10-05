@@ -36,7 +36,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.125.0",
     "@types/jest": "^27.0.1",
-    "@types/node": "^14.0.0",
+    "@types/node": "^14.15.0",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
@@ -79,7 +79,7 @@
     "flyway"
   ],
   "engines": {
-    "node": ">= 14.0.0"
+    "node": ">= 14.15.0"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
