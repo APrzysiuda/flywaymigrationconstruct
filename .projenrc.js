@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
   eslint: true,
-  devDeps: ['monocdk'],
+  deps: ['monocdk'],
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
   releaseWorkflowSetupSteps: [
