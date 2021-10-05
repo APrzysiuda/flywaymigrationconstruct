@@ -56,7 +56,6 @@ jobs:
       contents: write
       packages: write
       actions: write
-    if: on_success
     steps:
       - run: yarn install --check-files --frozen-lockfile
       - run: rm yarn.lock
