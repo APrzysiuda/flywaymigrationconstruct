@@ -87,6 +87,7 @@ project.release.addJobs({
 project.buildWorkflow.addJobs( {
   build_monocdk:{
     needs: 'build',
+    runsOn: 'ubuntu-latest',
     if: 'on_success',
     permissions: {
       contents: 'write',

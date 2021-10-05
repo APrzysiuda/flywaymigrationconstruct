@@ -51,6 +51,7 @@ jobs:
       image: jsii/superchain
   build_monocdk:
     needs: build
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
