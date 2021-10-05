@@ -1,31 +1,21 @@
-const { AwsCdkConstructLibrary, ProjectType, git, IgnoreFile } = require('projen');
-const { workflows, GithubWorkflow } = require('projen/lib/github');
+const { AwsCdkConstructLibrary, ProjectType, github, git, IgnoreFile } = require('projen');
+const { workflows, GitHub, GithubWorkflow } = require('projen/lib/github');
+const { Task } = require('projen/lib/tasks');
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
-  cdkVersion: '1.125.0',
+  cdkVersion: '1.119.0',
   minNodeVersion: '14.15.0',
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
+  projectType: ProjectType.LIB,
   cdkAssert: true,
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
   eslint: true,
-  deps: ['monocdk'],
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
-  releaseWorkflowSetupSteps: [
-    { run: 'rm yarn.lock' },
-    { run: 'rm .projenrc.js' },
-    { run: 'mv .projenrc.monocdk.js .projenrc.js' },
-    { run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
-    { run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
-    { run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
-    { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
-    { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
-    { run: 'npx projen' },
-  ],
   releaseWorkflow: true,
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
