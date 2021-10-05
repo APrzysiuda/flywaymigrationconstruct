@@ -16,7 +16,7 @@ const project = new AwsCdkConstructLibrary({
   devDeps: ['monocdk'],
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
-  releaseWorkflowSetupSteps:[{ run: 'yarn install --check-files --frozen-lockfile' },
+  releaseWorkflowSetupSteps:[{ run: 'yarn install --check-files' },
     { run: 'rm yarn.lock' },
     { run: 'rm .projenrc.js' },
     { run: 'mv .projenrc.monocdk.js .projenrc.js' },
