@@ -8,8 +8,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.secretsmanager.*;
 import com.amazonaws.services.secretsmanager.model.*;
-//import org.slf4j.LoggerFactory;
-//import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +22,12 @@ import tech.necko.flywayjar.S3Client;
 import tech.necko.flywayjar.ClientException;
 
 public class Main {
-    //private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
         System.out.println("entrez dans mon handler");
         String bucketName = System.getenv("BUCKET_NAME");
-        String mehdi = "ceci-est une mise à jour de mon build pour montrer à mehdi";
+        String mehdi = "ca marche poas osecounbr";
         String arn = System.getenv("ARN");
         //add string prefix = System.getenv("PREFIX");
 
@@ -72,7 +72,7 @@ public class Main {
         };
 
 
-        //LOGGER.debug(url);
+        LOGGER.debug(url);
         //path for files (always tmp for flyway)
         Path outputPath = Paths.get("/tmp");
         System.out.println("S3 client initialization");
