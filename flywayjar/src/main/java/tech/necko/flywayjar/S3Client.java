@@ -5,8 +5,8 @@ import com.amazonaws.services.s3.model.*;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-//import org.slf4j.LoggerFactory;
-//import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +15,14 @@ import tech.necko.flywayjar.ClientException;
 
 public class S3Client{
 
-    //private static final Logger LOGGER = LoggerFactory.getLogger(S3Client.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(S3Client.class);
 
     //S3client
     public AmazonS3 s3Client=AmazonS3ClientBuilder.standard().build();
 
     //listing object in bucket
     public List<S3ObjectSummary> getBucketObjectSummaries(String bucketName) throws ClientException {
-        //LOGGER.info("in getBucketObjectSummaries");
+        LOGGER.info("in getBucketObjectSummaries");
         List<S3ObjectSummary> s3ObjectSummaries = new ArrayList<S3ObjectSummary>();
         try {
             ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request().withBucketName(bucketName);//add with prefix
