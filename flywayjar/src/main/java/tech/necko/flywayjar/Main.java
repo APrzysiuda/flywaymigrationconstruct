@@ -27,7 +27,7 @@ public class Main {
         //parameter
         System.out.println("entrez dans mon handler");
         String bucketName = System.getenv("BUCKET_NAME");
-        String mehdi = "ca marche poas osecour";
+        String mehdi = "ca marche poas osecounbr";
         String arn = System.getenv("ARN");
         //add string prefix = System.getenv("PREFIX");
 
