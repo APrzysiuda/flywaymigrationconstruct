@@ -17,6 +17,7 @@ const project = new AwsCdkConstructLibrary({
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
   releaseWorkflowSetupSteps:[
+    { run: 'rm yarn.lock' },
     { run: 'rm .projenrc.js' },
     { run: 'mv .projenrc.monocdk.js .projenrc.js' },
     { run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
