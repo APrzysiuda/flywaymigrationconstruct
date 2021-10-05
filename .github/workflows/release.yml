@@ -26,6 +26,16 @@ jobs:
           git config user.email "github-actions@github.com"
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
+      - run: yarn install --check-files --frozen-lockfile
+      - run: rm yarn.lock
+      - run: rm .projenrc.js
+      - run: mv .projenrc.monocdk.js .projenrc.js
+      - run: find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
+      - run: find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
+      - run: find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
+      - run: find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
+      - run: find ./test -type f | xargs sed
+          -i  's,monocdk/assert,@monocdk-experiment/assert,g'
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -137,3 +147,21 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  build_monocdk:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      actions: write
+    steps:
+      - run: yarn install --check-files --frozen-lockfile
+      - run: rm yarn.lock
+      - run: rm .projenrc.js
+      - run: mv .projenrc.monocdk.js .projenrc.js
+      - run: find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
+      - run: find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
+      - run: find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
+      - run: find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
+      - run: find ./test -type f | xargs sed
+          -i  's,monocdk/assert,@monocdk-experiment/assert,g'
