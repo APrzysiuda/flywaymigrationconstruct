@@ -4,7 +4,7 @@ const { Task } = require('projen/lib/tasks');
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
-  cdkVersion: '1.119.0',
+  cdkVersion: '1.125.0',
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
