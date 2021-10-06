@@ -30,15 +30,6 @@ jobs:
           node-version: 14.15.0
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
-      - run: rm .projenrc.js
-      - run: mv .projenrc.monocdk.js .projenrc.js
-      - run: find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
-      - run: find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
-      - run: find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
-      - run: find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'
-      - run: find ./test -type f | xargs sed
-          -i  's,monocdk/assert,@monocdk-experiment/assert,g'
-      - run: npx projen
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -67,8 +58,8 @@ jobs:
           name: dist
           path: dist
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
-          $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt)
+        run: errout=$(mktemp); gh release create $(cat dist\releasetag.txt) -R
+          $GITHUB_REPOSITORY -F dist\changelog.md -t $(cat dist\releasetag.txt)
           --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode
           -ne 0 ] && ! grep -q "Release.tag_name already exists" $errout; then
           cat $errout; exit $exitcode; fi
