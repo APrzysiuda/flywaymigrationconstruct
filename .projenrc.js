@@ -10,6 +10,7 @@ const project = new AwsCdkConstructLibrary({
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
   cdkAssert: true,
+  deps: ['monocdk'],
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
   eslint: true,
@@ -21,6 +22,17 @@ const project = new AwsCdkConstructLibrary({
     module: 'flywaymigrationconstruct',
   },
   releaseEveryCommit: true,
+  releaseWorkflowSetupSteps: [
+    { run: 'rm yarn.lock' },
+    { run: 'rm .projenrc.js' },
+    { run: 'mv .projenrc.monocdk.js .projenrc.js' },
+    { run: "find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
+    { run: "find ./test -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'" },
+    { run: "find ./src -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
+    { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
+    { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
+    { run: 'npx projen' },
+  ],
 });
 
 project.release.addJobs({

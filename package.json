@@ -69,7 +69,8 @@
     "@aws-cdk/aws-lambda": "^1.125.0",
     "@aws-cdk/aws-s3": "^1.125.0",
     "@aws-cdk/aws-secretsmanager": "^1.125.0",
-    "@aws-cdk/core": "^1.125.0"
+    "@aws-cdk/core": "^1.125.0",
+    "monocdk": "^1.126.0"
   },
   "bundledDependencies": [],
   "keywords": [
