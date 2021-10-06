@@ -58,8 +58,8 @@ jobs:
           name: dist
           path: dist
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist\releasetag.txt) -R
-          $GITHUB_REPOSITORY -F dist\changelog.md -t $(cat dist\releasetag.txt)
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
+          $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt)
           --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode
           -ne 0 ] && ! grep -q "Release.tag_name already exists" $errout; then
           cat $errout; exit $exitcode; fi
@@ -142,7 +142,7 @@ jobs:
         run: export AWS_EC2_METADATA_DISABLED=true && mkdir ./temp && cp
           ./flywayjar/build/distributions/flywayjar-1.0.0.zip
           ./temp/flywayjar.$(cat dist/version.txt).zip && aws s3 sync ./temp/
-          s3://flywaymigrationconstruct
+          s3://flywaymigrationconstruct-cdk
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}

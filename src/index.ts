@@ -21,7 +21,7 @@ export class FlywayConstruct extends cdk.Construct {
 
   static readonly HANDLER = 'tech.necko.flywayjar.Main::handleRequest';
   static readonly ID_LAMBDA_CODE = 'bucketMigration';
-  static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct';
+  static readonly BUCKET_CODE_ARN = 'arn:aws:s3:::flywaymigrationconstruct-cdk';
   objectCodeKey = pjson.version;
   flywayLambdaMigration: awsLambda.Function;
 
