@@ -9,7 +9,6 @@ const project = new AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
-  projectType: ProjectType.LIB,
   cdkAssert: true,
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-lambda', '@aws-cdk/aws-ec2', '@aws-cdk/aws-s3', '@aws-cdk/aws-secretsmanager'],
   docgen: true,
@@ -17,7 +16,7 @@ const project = new AwsCdkConstructLibrary({
   releaseToNpm: true,
   keywords: ['cdk', 'flyway', 'DB'],
   release: true,
-  releaseWorkflowSetupSteps: [{run: 'npx projen'}],
+  releaseWorkflowSetupSteps: [{ run: 'npx projen' }],
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
     module: 'flywaymigrationconstruct',
