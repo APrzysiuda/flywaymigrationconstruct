@@ -2,7 +2,8 @@ const { AwsCdkConstructLibrary, ProjectType, github, IgnoreFile } = require('pro
 const project = new AwsCdkConstructLibrary({
   author: 'APrzysiuda',
   authorAddress: '180517@umons.ac.be',
-  cdkVersion: '1.119.0',
+  cdkVersion: '1.125.0',
+  minNodeVersion: '14.15.0',
   defaultReleaseBranch: 'main',
   name: 'flywaymigrationconstruct',
   repositoryUrl: 'https://github.com/APrzysiuda/flywaymigrationconstruct.git',
@@ -23,7 +24,7 @@ const project = new AwsCdkConstructLibrary({
     { run: "find ./test -type f | xargs sed -i  's,@aws-cdk,monocdk,g'" },
     { run: "find ./test -type f | xargs sed -i  's,monocdk/assert,@monocdk-experiment/assert,g'" },
     { run : "npx projen"}],
-  releaseWorkflow: true,
+  release: true,
   publishToPypi: {
     distName: 'flywaymigrationconstruct',
     module: 'flywaymigrationconstruct',
