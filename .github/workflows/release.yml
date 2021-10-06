@@ -30,7 +30,6 @@ jobs:
           node-version: 14.15.0
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
-      - run: rm yarn.lock
       - run: rm .projenrc.js
       - run: mv .projenrc.monocdk.js .projenrc.js
       - run: find ./src -type f | xargs sed -i  's,@aws-cdk/core,monocdk,g'
