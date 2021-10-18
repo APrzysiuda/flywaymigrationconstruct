@@ -75,16 +75,16 @@ public class Main {
         LOGGER.info("S3 client initialization");
         //S3Client
         S3Client client = new S3Client();
-        //LOGGER.info("Client created");
+        LOGGER.info("Client created");
         List<String> objectList = client.getBucketObjectNames(bucketName); //add prefix
-        //LOGGER.info("Loop start");
+        LOGGER.info("Loop start");
         //save object in tmp
         for (String objectName : objectList) {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);
             String path = "/tmp/" + objectName;
             client.s3Client.getObject(getObjectRequest, new File(path));
         }
-        //LOGGER.info("migration initialization");
+        LOGGER.info("migration initialization");
         //configure flyway with
         Flyway flyway = Flyway.configure().dataSource(url, username, password).locations("filesystem:/tmp/").load();
         // Start the migration
