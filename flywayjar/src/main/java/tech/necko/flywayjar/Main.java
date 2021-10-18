@@ -88,7 +88,7 @@ public class Main {
         //configure flyway with
         Flyway flyway = Flyway.configure().dataSource(url, username, password).locations("filesystem:/tmp/").load();
         // Start the migration
-        summary = flyway.migrate();
+        Object summary = flyway.migrate();
 
         return summary;
     }
