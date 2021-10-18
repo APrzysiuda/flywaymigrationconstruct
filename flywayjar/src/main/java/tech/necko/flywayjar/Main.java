@@ -90,6 +90,6 @@ public class Main {
         // Start the migration
         Object summary = flyway.migrate();
 
-        return summary;
+        return summary.toString();
     }
 }
