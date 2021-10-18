@@ -25,7 +25,7 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public String handleRequest(Map<String, Object> input, Context context) throws ClientException {
         //parameter
-        LOGGER.info("Start Lambda handler")
+        LOGGER.info("Start Lambda handler");
         String bucketName = System.getenv("BUCKET_NAME");
         String arn = System.getenv("ARN");
         //add string prefix = System.getenv("PREFIX");
@@ -39,7 +39,6 @@ public class Main {
         try {
             LOGGER.info("Pass in try catch");
             getSecretValueResult = clientManager.getSecretValue(getSecretValueRequest);
-            System.out.println(getSecretValueResult);
         } catch (ResourceNotFoundException e) {
             throw new ClientException("The requested secret " + arn + " was not found");
         } catch (InvalidRequestException e) {
