@@ -1,8 +1,8 @@
-import {expect, haveResource} from '@aws-cdk/assert';
+import { expect, haveResource } from '@aws-cdk/assert';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as secrets from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
-import {FlywayConstruct} from '../src';
+import { FlywayConstruct } from '../src';
 
 test('test stack', () => {
   const app = new cdk.App();
