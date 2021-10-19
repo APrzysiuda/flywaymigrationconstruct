@@ -10,8 +10,8 @@ test('test stack', () => {
   const bucket = new s3.Bucket(stack, 'bucket');
   const secret = new secrets.Secret(stack, 'secret');
   const construct = new FlywayConstruct(stack, 'testConstruct', {
-      migrationDBSecretManager: secret,
-      bucketMigrationSQL: bucket,
+    migrationDBSecretManager: secret,
+    bucketMigrationSQL: bucket,
   });
   construct.flywayLambdaMigration;
   expect(stack).to(haveResource('AWS::Lambda::Function'));
